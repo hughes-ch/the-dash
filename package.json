@@ -1,0 +1,19 @@
+{
+  "author": "hughes-ch <contact@chrishughesdev.com>",
+  "description": "Personal dashboard for Chris Hughes",
+  "devDependencies": {
+    "netlify-cli": "^6.14.25"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "name": "the-dash",
+  "private": true,
+  "repository": "https://github.com/hughes-ch/the-dash.git",
+  "scripts": {
+    "host": "yarn netlify dev",
+  },
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/*"
+  ]
+}
