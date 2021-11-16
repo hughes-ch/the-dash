@@ -24,7 +24,6 @@ node -e 'require("@the-dash/api/scripts/setup-test-db").init()'
 # Start serving functions
 function cleanup ()
 {
-    echo Cleaning up...
     docker kill $CONTAINER_NAME &> /dev/null
     docker rm $CONTAINER_NAME &> /dev/null
     exit 2

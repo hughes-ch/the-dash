@@ -21,7 +21,7 @@ module.exports = async function(event) {
   if (process.env.AWS_ENDPOINT) {
     clientConfig.endpoint = process.env.AWS_ENDPOINT;
   }
-  
+  console.log(`Sending to endpoint ${clientConfig.endpoint}`);
   const client = new DynamoDBClient(clientConfig);
 
   // Get entry from database
