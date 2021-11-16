@@ -13,12 +13,16 @@
   "scripts": {
     "build": "yarn workspace @the-dash/ui build",
     "prebuild": "yarn install && yarn test",
-    "host": "yarn workspace @the-dash/ui start",
-    "prehost": "yarn netlify functions:serve",
+    "host": "concurrently --kill-others-on-fail 'yarn:host-*'",
+    "host-ui": "yarn workspace @the-dash/ui start",
+    "host-api": "bash packages/api/scripts/start",
     "test": "yarn workspace @the-dash/api test && yarn workspace @the-dash/ui test --watchAll=false"
   },
   "version": "1.0.0",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "concurrently": "^6.4.0"
+  }
 }

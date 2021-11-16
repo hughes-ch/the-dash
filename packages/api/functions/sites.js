@@ -4,11 +4,15 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
+const getSites = require('@the-dash/api/lib/get-sites');
+
 exports.handler = async function(event, context) {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Hello world!',
-    }),
-  };
+  if (event.httpMethod === 'GET') {
+    return getSites(event);
+  } else {
+    return {
+      statusCode: 405,
+      body: 'Invalid method for URL',
+    };
+  }
 };

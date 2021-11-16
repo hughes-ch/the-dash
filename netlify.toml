@@ -4,6 +4,10 @@
 
 [functions]
   directory = 'packages/api/functions'
+  included_files = [
+    'packages/common/config.json',
+    'packages/common/src/*.js',
+  ]
 
 [[redirects]]
   from = '/sites'
