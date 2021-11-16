@@ -3,7 +3,7 @@
   "description": "The back-end API for The Dash",
   "devDependencies": {
     "jest": "^27.3.1",
-    "shelljs": "^0.8.4"
+    "jest-dynalite": "^3.4.4"
   },
   "license": "MIT",
   "main": "index.js",
@@ -12,9 +12,7 @@
   "scripts": {
     "setup-local-env": "node test/setupTests.js",
     "teardown-local-env": "node test/teardownTests.js",
-    "test": "yarn jest --coverage --verbose",
-    "pretest": "yarn setup-local-env",
-    "posttest": "yarn teardown-local-env"
+    "test": "yarn jest --coverage --verbose"
   },
   "version": "1.0.0",
   "dependencies": {

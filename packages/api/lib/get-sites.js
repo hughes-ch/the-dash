@@ -18,14 +18,8 @@ module.exports = async function(event) {
     region: process.env.MY_AWS_REGION,
   };
 
-  if (process.env.USE_LOCAL_DB) {
-    process.env.AWS_SITE_TABLE = config['test-db-site-table'];
-    const url = `http://localhost:${config['test-db-host-port']}`;
-    clientConfig.endpoint = url;
-    
-    clientConfig.credentials.accessKeyId = 'test';
-    clientConfig.credentials.secretAccessKey = 'test';
-    clientConfig.region = 'test';
+  if (process.env.AWS_ENDPOINT) {
+    clientConfig.endpoint = process.env.AWS_ENDPOINT;
   }
   
   const client = new DynamoDBClient(clientConfig);
