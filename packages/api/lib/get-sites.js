@@ -4,7 +4,6 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
-const config = require('@the-dash/common/config.json');
 const { DynamoDBClient,
         QueryCommand } = require("@aws-sdk/client-dynamodb");
 
