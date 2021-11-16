@@ -12,9 +12,10 @@
   "repository": "https://github.com/hughes-ch/the-dash.git",
   "scripts": {
     "build": "yarn workspace @the-dash/ui build",
-    "prebuild": "yarn install",
+    "prebuild": "yarn install && yarn test",
     "host": "yarn workspace @the-dash/ui start",
-    "prehost": "yarn netlify functions:serve"
+    "prehost": "yarn netlify functions:serve",
+    "test": "yarn workspace @the-dash/api test && yarn workspace @the-dash/ui test --watchAll=false"
   },
   "version": "1.0.0",
   "workspaces": [
