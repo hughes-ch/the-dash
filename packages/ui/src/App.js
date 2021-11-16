@@ -6,9 +6,8 @@ function App() {
 
   let fetchContent = async () => {
     setContent('Loading...');
-    
-    const host = window.location.protocol + '//' + window.location.host;
-    const url = `${host}/sites`;
+
+    const url = `/sites`;
     const response = await fetch(url);
     const parsedJson = await response.json();
 

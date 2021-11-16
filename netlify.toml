@@ -1,4 +1,5 @@
 [build]
+  command = 'yarn build'
   publish = 'packages/ui/build'
 
 [functions]
