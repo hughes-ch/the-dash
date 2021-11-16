@@ -1,0 +1,21 @@
+{
+  "author": "Chris Hughes",
+  "description": "The back-end API for The Dash",
+  "devDependencies": {
+    "jest": "^27.3.1",
+    "jest-dynalite": "^3.4.4"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "name": "@the-dash/api",
+  "repository": "https://github.com/hughes-ch/the-dash",
+  "scripts": {
+    "setup-local-env": "node test/setupTests.js",
+    "teardown-local-env": "node test/teardownTests.js",
+    "test": "yarn jest --coverage --verbose"
+  },
+  "version": "1.0.0",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.41.0"
+  }
+}

@@ -12,12 +12,17 @@
   "repository": "https://github.com/hughes-ch/the-dash.git",
   "scripts": {
     "build": "yarn workspace @the-dash/ui build",
-    "prebuild": "yarn install",
-    "host": "yarn netlify dev",
-    "prehost": "yarn build"
+    "prebuild": "yarn install && yarn test",
+    "host": "concurrently --kill-others-on-fail 'yarn:host-*'",
+    "host-ui": "yarn workspace @the-dash/ui start",
+    "host-api": "bash packages/api/scripts/start",
+    "test": "yarn workspace @the-dash/api test && yarn workspace @the-dash/ui test --watchAll=false"
   },
   "version": "1.0.0",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "concurrently": "^6.4.0"
+  }
 }
