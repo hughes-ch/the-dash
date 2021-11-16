@@ -4,7 +4,7 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
-const config = require('@the-dash/common/config');
+const config = require('@the-dash/common/config.json');
 const { DynamoDBClient,
         QueryCommand } = require("@aws-sdk/client-dynamodb");
 
@@ -21,7 +21,6 @@ module.exports = async function(event) {
   if (process.env.AWS_ENDPOINT) {
     clientConfig.endpoint = process.env.AWS_ENDPOINT;
   }
-  console.log(`Sending to endpoint ${clientConfig.endpoint}`);
   const client = new DynamoDBClient(clientConfig);
 
   // Get entry from database
