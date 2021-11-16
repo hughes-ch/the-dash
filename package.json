@@ -11,8 +11,10 @@
   "private": true,
   "repository": "https://github.com/hughes-ch/the-dash.git",
   "scripts": {
-    "host": "yarn netlify dev",
-    "prehost": "yarn workspace @the-dash/ui build"
+    "build": "yarn workspace @the-dash/ui build",
+    "prebuild": "yarn install",
+    "host": "yarn workspace @the-dash/ui start",
+    "prehost": "yarn netlify functions:serve"
   },
   "version": "1.0.0",
   "workspaces": [
