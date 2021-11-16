@@ -1,0 +1,10 @@
+[build]
+  publish = 'packages/ui/build'
+
+[functions]
+  directory = 'packages/api/functions'
+
+[[redirects]]
+  from = '/sites'
+  to = '/.netlify/functions/sites'
+  status = 200

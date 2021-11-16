@@ -1,0 +1,21 @@
+{
+  "author": "hughes-ch <contact@chrishughesdev.com>",
+  "description": "Personal dashboard for Chris Hughes",
+  "devDependencies": {
+    "create-react-app": "^4.0.3",
+    "netlify-cli": "^6.14.25"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "name": "the-dash",
+  "private": true,
+  "repository": "https://github.com/hughes-ch/the-dash.git",
+  "scripts": {
+    "host": "yarn netlify dev",
+    "prehost": "yarn workspace @the-dash/ui build"
+  },
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/*"
+  ]
+}
