@@ -1,0 +1,9 @@
+{
+  "name": "@the-dash/common",
+  "version": "1.0.0",
+  "description": "Common stuff for The Dash project",
+  "main": "index.js",
+  "repository": "https://github.com/hughes-ch/the-dash",
+  "author": "Chris Hughes",
+  "license": "MIT"
+}
