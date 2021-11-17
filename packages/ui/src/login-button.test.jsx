@@ -7,18 +7,10 @@
 import config from './app-config';
 import LoginButton from './login-button';
 import {render, screen} from '@testing-library/react';
-import {rest} from 'msw';
-import {setupServer} from 'msw/node';
 
 /**
  * Initial setup and teardown
  */
-const server = setupServer(
-  rest.get(config.AUTH_BASE_URL, (req, res, ctx) => {
-    console.log(req);
-  }),
-);
-
 let windowHrefMockValue = 'test.html';
 
 beforeEach(() => {
@@ -30,9 +22,9 @@ beforeEach(() => {
 /**
  * Unit tests
  */
-it('logs in on click', async () => {
+it('logs in on click', () => {
   render(<LoginButton/>);
-  screen.getByRole('button').click();
+  screen.getByText('Log in').click();
   
   const baseUrl = config.AUTH_BASE_URL;
   const clientId = config.AUTH_CLIENT_ID;

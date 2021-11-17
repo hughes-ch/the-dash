@@ -42,6 +42,22 @@ const AuthContext = React.createContext({
       
       window.location.href = authUrl;
     },
+
+    /**
+     * Starts the logout process
+     *
+     * @return {undefined}
+     */
+    logout: () => {
+      const authBaseUrl = config.AUTH_BASE_URL;
+      const clientId = config.AUTH_CLIENT_ID;
+      const appBaseUrl = window.location.origin + '/';
+      
+      const logoutUrl = `${authBaseUrl}logout?client_id=${clientId}&` +
+            `logout_uri=${appBaseUrl}`;
+
+      window.location.href = logoutUrl;
+    },
   }
 });
 
