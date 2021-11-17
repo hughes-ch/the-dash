@@ -7,8 +7,8 @@
 import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { LoginButton } from './login-button';
-import { LogoutButton } from './logout-button';
+import LoginButton from './login-button';
+import LogoutButton from './logout-button';
 
 ReactDOM.render(
   <React.StrictMode>

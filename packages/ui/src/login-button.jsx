@@ -13,7 +13,7 @@ import React, {useContext} from 'react';
  *
  * @return {React.Component}
  */
-export function LoginButton() {
+function LoginButton() {
   const auth = useContext(AuthContext);
 
   return(
@@ -22,4 +22,6 @@ export function LoginButton() {
     </button>
   );
 }
+
+export default LoginButton;
 

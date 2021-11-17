@@ -7,10 +7,12 @@
 import './logout-button.css';
 import React from 'react';
 
-export function LogoutButton() {
+function LogoutButton() {
   return(
     <button className='nav-button'>
       Log Out
     </button>
   );
 }
+
+export default LogoutButton;
