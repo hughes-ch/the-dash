@@ -5,12 +5,21 @@
  *   :license: MIT License
  */
 import './login-button.css';
-import React from 'react';
+import AuthContext from './auth-context';
+import React, {useContext} from 'react';
 
+/**
+ * Renderes the LoginButton to the DOM
+ *
+ * @return {React.Component}
+ */
 export function LoginButton() {
+  const auth = useContext(AuthContext);
+
   return(
-    <button className='nav-button'>
-      Log In
+    <button className='nav-button' onClick={auth.actions.login}>
+      Log in
     </button>
   );
 }
+

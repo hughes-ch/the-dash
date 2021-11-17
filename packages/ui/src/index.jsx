@@ -7,17 +7,13 @@
 import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Auth0Provider } from "@auth0/auth0-react";
 import { LoginButton } from './login-button';
+import { LogoutButton } from './logout-button';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Auth0Provider
-      domain={process.env.AUTH0_DOMAIN}
-      clientId={process.env.AUTH0_CLIENT_ID}
-      redirectUri={window.location.origin}>
-      <LoginButton />
-    </Auth0Provider>
+    <LoginButton />
+    <LogoutButton />
   </React.StrictMode>,
   document.getElementById('root')
 );
