@@ -1,0 +1,23 @@
+:root {
+    --foreground-1: #ff914d;
+    --foreground-2: white;
+    --focus-color: black;
+    --shadow-color: #9aa7b2;
+}
+
+.nav-button {
+    background-color: var(--foreground-1);
+    border: solid 0.15em var(--foreground-1);
+    border-radius: 0.25em;
+    box-shadow: 0.15em 0.15em var(--shadow-color);
+    color: var(--foreground-2);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+    padding: 0.5em;
+}
+.nav-button:focus {
+    border-color: var(--focus-color);
+}
+.nav-button:hover {
+    border-color: var(--focus-color);
+}
