@@ -1,0 +1,24 @@
+/**
+ *   Defines Global Status Bubble styling
+ *
+ *   :copyright: Copyright (c) 2021 Chris Hughes
+ *   :license: MIT License
+ */
+@import './root.css';
+
+div.detailed-status-bubble {
+    --font-size: 2rem;
+    
+    color: var(--foreground-2);
+    font-family: var(--content-font-family);
+    font-size: var(--font-size);
+}
+div.detailed-status-bubble > span:nth-child(even) {
+    margin-bottom: var(--font-size);
+}
+@media only screen and (max-width: 650px) {
+    div.detailed-status-bubble {
+        --font-size: 4.5vw;
+    }
+}
+

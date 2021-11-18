@@ -7,11 +7,13 @@
 import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import GlobalStatus from './global-status';
+import DetailedStatusBubble from './detailed-status-bubble';
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStatus numAlarms='45'/>
+    <DetailedStatusBubble numApps='2'
+                          lastUpdate='1 hour ago'
+                          nextUpdate='2 hours'/>
   </React.StrictMode>,
   document.getElementById('root')
 );
