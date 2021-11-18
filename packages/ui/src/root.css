@@ -5,6 +5,8 @@
  *   :license: MIT License
  */
 :root {
+    --alarm-color: #ff1616;
+    --all-clear-color: #7ed957;
     --background: #38b6ff;
     --content-font-family: 'Open Sans', sans-serif;
     --foreground-1: #ff914d;

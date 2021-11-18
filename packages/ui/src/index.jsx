@@ -7,11 +7,11 @@
 import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SplashScreen from './splash-screen';
+import GlobalStatus from './global-status';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SplashScreen />
+    <GlobalStatus numAlarms='45'/>
   </React.StrictMode>,
   document.getElementById('root')
 );
