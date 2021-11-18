@@ -5,15 +5,13 @@
  *   :license: MIT License
  */
 import './index.css';
+import NavigationBar from './nav-bar';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LoginButton from './login-button';
-import LogoutButton from './logout-button';
 
 ReactDOM.render(
   <React.StrictMode>
-    <LoginButton />
-    <LogoutButton />
+    <NavigationBar />
   </React.StrictMode>,
   document.getElementById('root')
 );

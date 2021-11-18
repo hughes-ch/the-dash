@@ -1,0 +1,13 @@
+/**
+ *   Defines common variables
+ *
+ *   :copyright: Copyright (c) 2021 Chris Hughes
+ *   :license: MIT License
+ */
+:root {
+    --background: #38b6ff;
+    --foreground-1: #ff914d;
+    --foreground-2: white;
+    --focus-color: black;
+    --shadow-color: #9aa7b2;
+}
