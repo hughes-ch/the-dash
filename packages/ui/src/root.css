@@ -6,8 +6,11 @@
  */
 :root {
     --background: #38b6ff;
+    --content-font-family: 'Open Sans', sans-serif;
     --foreground-1: #ff914d;
     --foreground-2: white;
     --focus-color: black;
+    --max-width: 655px;
     --shadow-color: #9aa7b2;
+    --title-font-family: 'Pacifico', cursive;
 }

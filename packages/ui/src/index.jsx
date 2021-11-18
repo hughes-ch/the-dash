@@ -5,13 +5,13 @@
  *   :license: MIT License
  */
 import './index.css';
-import NavigationBar from './nav-bar';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SplashScreen from './splash-screen';
 
 ReactDOM.render(
   <React.StrictMode>
-    <NavigationBar />
+    <SplashScreen />
   </React.StrictMode>,
   document.getElementById('root')
 );

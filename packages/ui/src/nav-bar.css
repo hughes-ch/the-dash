@@ -15,12 +15,14 @@
     align-items: center;
     background-color: var(--background);
     width: 100%;
-    max-width: 50vh;
     border-bottom: var(--foreground-2) 1px solid;
-    font-family: 'Pacifico', cursive;
+    font-family: var(--title-font-family);
     color: var(--foreground-2);
     font-size: 2em;
     text-transform: uppercase;
     height: 2em;
-    padding: 0em 0.5em 0em 0.5em;
 }
+.navigation-bar span {
+    padding: 0.5em 0.5em 0.5em 0.5em;
+}
+

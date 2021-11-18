@@ -1,2 +1,13 @@
+/**
+ *   Defines overall page styling
+ *
+ *   :copyright: Copyright (c) 2021 Chris Hughes
+ *   :license: MIT License
+ */
+@import './root.css';
+
 body {
+    background-color: var(--background);
+    margin: 0;
+    width: 100%;
 }

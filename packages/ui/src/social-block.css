@@ -1,0 +1,30 @@
+/**
+ *   Defines social block styling
+ *
+ *   :copyright: Copyright (c) 2021 Chris Hughes
+ *   :license: MIT License
+ */
+@import './root.css';
+
+.social-block {
+    background-color: var(--foreground-2);
+    border-radius: 1rem;
+    color: black;
+    padding-left: 2rem;
+    padding-top: 1rem;
+    padding-right: 2rem;
+    text-align: center;
+}
+.social-block a {
+    color: var(--foreground-2);
+    text-decoration: none;
+}
+.social-block img {
+    height: 2.5rem;
+    padding: 0rem 0.3rem 1rem 0.3rem;
+}
+.social-block p {
+    margin-block-start: 0rem;
+    margin-block-end: 1rem;
+}
+

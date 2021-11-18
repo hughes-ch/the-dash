@@ -9,6 +9,10 @@ const testSettings = {
   AUTH_CLIENT_ID: 'test-client-id',
   AUTH_RESPONSE_TYPE: 'token',
   AUTH_SCOPE: 'email+openid',
+  EXT_URL_EMAIL: 'mailto:contact@chrishughesdev.com',
+  EXT_URL_LINKEDIN: 'https://www.linkedin.com/in/hughes-ch/',
+  EXT_URL_GITHUB: 'https://github.com/',
+  EXT_URL_WEBSITE: 'https://blog.chrishughesdev.com',
 };
 const developmentSettings = { ...testSettings };
 developmentSettings.AUTH_BASE_URL = 'https://auth.dev.the-dash.chrishughesdev.com/';
