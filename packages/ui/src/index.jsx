@@ -7,13 +7,11 @@
 import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DetailedStatusBubble from './detailed-status-bubble';
+import DeleteUrlButton from './delete-url-button';
 
 ReactDOM.render(
   <React.StrictMode>
-    <DetailedStatusBubble numApps='2'
-                          lastUpdate='1 hour ago'
-                          nextUpdate='2 hours'/>
+    <DeleteUrlButton />
   </React.StrictMode>,
   document.getElementById('root')
 );
