@@ -14,5 +14,6 @@
     --focus-color: black;
     --max-width: 655px;
     --shadow-color: #9aa7b2;
+    --shadow-def: 0.1em 0.1em 0.1em 0.05em var(--shadow-color);
     --title-font-family: 'Pacifico', cursive;
 }

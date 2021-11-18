@@ -5,13 +5,17 @@
  *   :license: MIT License
  */
 import './index.css';
+import DeleteUrlButton from './delete-url-button';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DeleteUrlButton from './delete-url-button';
+import UrlStatusLight from './url-status-light';
 
 ReactDOM.render(
   <React.StrictMode>
     <DeleteUrlButton />
+    <div style={{marginTop:'10rem'}}>
+      <UrlStatusLight isDown={true} />
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );

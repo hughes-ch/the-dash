@@ -1,0 +1,24 @@
+/**
+ *   Defines URL status light styling
+ *
+ *   :copyright: Copyright (c) 2021 Chris Hughes
+ *   :license: MIT License
+ */
+@import './root.css';
+
+.url-status-light {
+    font-family: var(--content-font-family);
+    color: var(--foreground-2);
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-def);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.url-status-light.down {
+    background-color: var(--alarm-color);
+}
+.url-status-light.good {
+    background-color: var(--all-clear-color);
+}
