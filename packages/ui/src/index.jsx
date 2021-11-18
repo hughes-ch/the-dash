@@ -8,13 +8,18 @@ import './index.css';
 import DeleteUrlButton from './delete-url-button';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UrlStatusLight from './url-status-light';
+import SpinningLoader from './spinning-loader';
 
 ReactDOM.render(
   <React.StrictMode>
     <DeleteUrlButton />
-    <div style={{marginTop:'10rem'}}>
-      <UrlStatusLight isDown={true} />
+    <div style={{
+      marginTop:'10rem',
+      backgroundColor: 'white',
+      height: '100px',
+      padding: '100px',
+    }}>
+      <SpinningLoader />
     </div>
   </React.StrictMode>,
   document.getElementById('root')
