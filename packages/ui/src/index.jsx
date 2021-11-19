@@ -8,7 +8,8 @@ import './index.css';
 import DeleteUrlButton from './delete-url-button';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SpinningLoader from './spinning-loader';
+import RefreshUrlButton from './refresh-url-button';
+import UrlStatusLight from './url-status-light';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,7 +20,8 @@ ReactDOM.render(
       height: '100px',
       padding: '100px',
     }}>
-      <SpinningLoader />
+      <RefreshUrlButton isLoading={true}/>
+      <UrlStatusLight isDown={true}/>
     </div>
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,33 +1,33 @@
 /**
- *   Defines URL status light styling
+ *   Defines the spinning loader styling
  *
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
 @import './root.css';
 
-.url-status-light {
+.refresh-url-button {
+    --webkit-appearance: none;
+    align-content: center;
+    align-items: center;
+    background-color: var(--background);
     border-radius: var(--dashboard-border-radius);
+    border: none;
     box-shadow: var(--shadow-def);
-    box-sizing: border-box;
     color: var(--foreground-2);
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
     font-family: var(--content-font-family);
     font-size: var(--dashboard-button-font-size);
     font-weight: bold;
+    height: calc(1rem * 2 + var(--dashboard-button-font-size) + 0.5rem);
+    justify-content: center;
     margin: 1rem;
     padding: 1rem;
-    text-align: center;
     text-transform: uppercase;
     width: var(--dashboard-button-width);
 }
-.url-status-light.down {
-    background-color: var(--alarm-color);
-}
-.url-status-light.good {
-    background-color: var(--all-clear-color);
-}
-.url-status-light > span {
+.refresh-url-button > span {
     bottom: 0;
     left: 0;
     position: relative;

@@ -18,7 +18,7 @@ function UrlStatusLight(props) {
   const className = `url-status-light ${text.toLowerCase()}`;
   return(
     <span className={className}>
-      {text}
+      <span>{text}</span>
     </span>
   );
 }

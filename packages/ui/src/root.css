@@ -8,12 +8,15 @@
     --alarm-color: #ff1616;
     --all-clear-color: #7ed957;
     --background: #38b6ff;
+    --dashboard-border-radius: 0.5rem;
+    --dashboard-button-font-size: 1rem;
+    --dashboard-button-width: 8rem;
     --content-font-family: 'Open Sans', sans-serif;
     --foreground-1: #ff914d;
     --foreground-2: white;
     --focus-color: black;
     --max-width: 655px;
     --shadow-color: #9aa7b2;
-    --shadow-def: 0.1em 0.1em 0.1em 0.05em var(--shadow-color);
+    --shadow-def: 0.1rem 0.1rem 0.1rem 0.05rem var(--shadow-color);
     --title-font-family: 'Pacifico', cursive;
 }
