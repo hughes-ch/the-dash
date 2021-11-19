@@ -1,0 +1,65 @@
+/**
+ *   Defines new application popup styling
+ *
+ *   :copyright: Copyright (c) 2021 Chris Hughes
+ *   :license: MIT License
+ */
+@import './root.css';
+
+div.new-application-popup {
+    align-content: center;
+    align-items: center;
+    background-color: rgba(242, 242, 242, 0.75);
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100vw;
+    z-index: 1;
+}
+.new-application-popup > form {
+    align-content: center;
+    align-items: center;
+    background-color: var(--foreground-2);
+    border-radius: calc(var(--dashboard-border-radius) * 2);
+    box-shadow: var(--shadow-def);
+    color: var(--foreground-1);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--content-font-family);
+    font-size: 2rem;
+    justify-content: space-between;
+    padding: 1rem;
+    width: 40rem;
+}
+.new-application-popup > form > div:nth-child(2) > input {
+    border-radius: var(--dashboard-border-radius);
+    display: block;
+    font-family: var(--content-font-family);
+    font-size: inherit;
+    margin-bottom: 3rem;
+    padding: 0rem 0.3rem 0rem 0.3rem;
+}
+.new-application-popup > form > div:nth-child(3) > * {
+    border: none;
+    border-radius: var(--dashboard-border-radius);
+    box-shadow: var(--shadow-def);
+    color: white;
+    font-family: var(--content-font-family);
+    font-size: inherit;
+    font-weight: bold;
+    margin: 1rem;
+    padding: 1rem;
+}
+.new-application-popup > form > div:nth-child(3) > input {
+    background-color: var(--all-clear-color);
+}
+.new-application-popup > form > div:nth-child(3) > button {
+    background-color: var(--alarm-color);
+}
+
