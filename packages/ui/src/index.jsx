@@ -6,6 +6,7 @@
  */
 import './index.css';
 import ApplicationCard from './application-card';
+import DashboardButton from './dashboard-button';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -18,6 +19,7 @@ ReactDOM.render(
       lastStatusChange={new Date(2021, 9, 24)}
       onDeleteClick={undefined}
       onRefreshClick={undefined}/>
+    <DashboardButton name='Add Another App' onClick={undefined}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

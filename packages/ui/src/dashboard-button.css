@@ -1,0 +1,21 @@
+/**
+ *   Defines dashboard button styling
+ *
+ *   :copyright: Copyright (c) 2021 Chris Hughes
+ *   :license: MIT License
+ */
+@import './root.css';
+
+.dashboard-button {
+    --webkit-appearance: none;
+    background-color: var(--foreground-2);
+    border-radius: var(--dashboard-border-radius);
+    border: none;
+    box-shadow: var(--shadow-def);
+    color: var(--foreground-1);
+    font-family: var(--content-font-family);
+    font-size: var(--dashboard-button-font-size);
+    font-weight: bold;
+    margin: 1rem;
+    padding: 1rem;
+}
