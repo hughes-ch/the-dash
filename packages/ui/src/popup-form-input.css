@@ -1,0 +1,16 @@
+/**
+ *   Defines new application popup styling
+ *
+ *   :copyright: Copyright (c) 2021 Chris Hughes
+ *   :license: MIT License
+ */
+@import './root.css';
+
+.popup-form-input > input {
+    border-radius: var(--dashboard-border-radius);
+    display: block;
+    font-family: var(--content-font-family);
+    font-size: inherit;
+    padding: 0rem 0.3rem 0rem 0.3rem;
+}
+

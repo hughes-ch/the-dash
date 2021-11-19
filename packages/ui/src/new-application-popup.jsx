@@ -4,7 +4,10 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
-import './new-application-popup.css';
+import PopupFormButton from './popup-form-button';
+import PopupFormInput from './popup-form-input';
+import PopupSubmitButton from './popup-submit-button';
+import PopupWindow from './popup-window';
 import React from 'react';
 
 /**
@@ -15,21 +18,16 @@ import React from 'react';
  */
 function NewApplicationPopup(props) {
   return(
-    <React.Fragment>
-      <div className='new-application-popup'>
-        <form onSubmit={props.onSubmit} className='new-application-popup'>
-          <h3>New Application</h3>
-          <div>
-            <label htmlFor='new-app'>Name</label>
-            <input type='text' id='new-app' name='new-app'></input>
-          </div>
-          <div>
-            <input type='submit' value='Submit'/>
-            <button onClick={props.onCancel}>Cancel</button>
-          </div>
-        </form>
+    <PopupWindow onSubmit={props.onSubmit}>
+      <h3>New Application</h3>
+      <PopupFormInput type='text' name='Name'/>
+      <div>
+        <PopupSubmitButton text='Submit' color='--all-clear-color'/>
+        <PopupFormButton text='Cancel'
+                         onClick={props.onCancel}
+                         color='--alarm-color'/>
       </div>
-    </React.Fragment>
+    </PopupWindow>
   );
 }
 

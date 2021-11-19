@@ -5,6 +5,7 @@
  *   :license: MIT License
  */
 import './bubble-container.css';
+import {getColorFromCss} from './common';
 import React from 'react';
 
 /**
@@ -17,16 +18,10 @@ function BubbleContainer(props) {
   const bubbleClassName = `bubble-container ${props.size}`;
   const containerClassName = `bubble-container-container ${props.size}`;
 
-  // Take color from props unless color is a variable
-  let color = props.color;
-  if (props.color.includes('--')) {
-    color = window.getComputedStyle(document.documentElement)
-      .getPropertyValue(props.color);
-  }
-  
   return(
     <div className={containerClassName}>
-      <div className={bubbleClassName} style={{backgroundColor:color}}>
+      <div className={bubbleClassName}
+           style={{backgroundColor:getColorFromCss(props.color)}}>
         <div>{props.children}</div>
       </div>
     </div>

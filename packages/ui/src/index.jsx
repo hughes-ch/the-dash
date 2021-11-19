@@ -7,7 +7,7 @@
 import './index.css';
 import ApplicationCard from './application-card';
 import DashboardButton from './dashboard-button';
-import NewApplicationPopup from './new-application-popup';
+import DeleteApplicationPopup from './delete-application-popup';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -21,7 +21,9 @@ ReactDOM.render(
       onDeleteClick={undefined}
       onRefreshClick={undefined}/>
     <DashboardButton name='Add Another App' onClick={undefined}/>
-    <NewApplicationPopup onSubmit={undefined} onCancel={undefined}/>
+    <DeleteApplicationPopup app='chrishughesdev.com'
+                            onSubmit={undefined}
+                            onCancel={undefined}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

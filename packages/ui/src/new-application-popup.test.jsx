@@ -5,18 +5,17 @@
  *   :license: MIT License
  */
 import NewApplicationPopup from './new-application-popup';
-import {render, screen} from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 
 /**
  * Unit tests
  */
 it('renders correctly', () => {
 
-  // Add 'mock' submit that takes form data
   let submittedContent;
   const onSubmit = (event) => {
     event.preventDefault();
-    submittedContent = event.target.elements['new-app'].value;
+    submittedContent = event.target.elements['name'].value;
   };
 
   const mockCancel = jest.fn();
@@ -32,7 +31,7 @@ it('renders correctly', () => {
   
   // Click all the buttons and make sure they worked
   screen.getByText('Cancel').click();
-  screen.getByText('Submit').click();
+  fireEvent.submit(document.getElementsByName('popup-form')[0]);
   expect(mockCancel).toHaveBeenCalledTimes(1);
   expect(submittedContent).toEqual(expectedInputValue);
 });
