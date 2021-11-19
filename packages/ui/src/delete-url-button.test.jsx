@@ -11,6 +11,8 @@ import {render, screen} from '@testing-library/react';
  * Unit tests
  */
 it('renders correctly', () => {
-  render(<DeleteUrlButton />);
-  screen.getByRole('button');
+  const mockDelete = jest.fn();
+  render(<DeleteUrlButton onClick={mockDelete}/>);
+  screen.getByRole('button').click();
+  expect(mockDelete).toHaveBeenCalledTimes(1);
 });

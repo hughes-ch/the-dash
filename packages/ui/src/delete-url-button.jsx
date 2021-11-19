@@ -10,11 +10,13 @@ import React from 'react';
 /**
  * Renders the DeleteUrlButton to the DOM
  *
+ * @param {React.Props} props Properties of this element
  * @return {React.Component}
  */
 function DeleteUrlButton(props) {
   return(
-    <button className='delete-url-button'/>
+    <button className='delete-url-button' onClick={props.onClick} name='delete'>
+    </button>
   );
 }
 

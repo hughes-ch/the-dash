@@ -16,9 +16,13 @@ import SpinningLoader from './spinning-loader';
  */
 function RefreshUrlButton(props) {
   const content = props.isLoading ? <SpinningLoader /> : <span>Refresh</span>;
-  
+  const isDisabled = props.isLoading ? {disabled:true} : {};
+
   return(
-    <button className='refresh-url-button' onClick={props.onClick}>
+    <button className='refresh-url-button'
+            onClick={props.onClick}
+            name='refresh'
+            {...isDisabled}>
       {content}
     </button>
   );

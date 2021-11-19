@@ -5,24 +5,19 @@
  *   :license: MIT License
  */
 import './index.css';
-import DeleteUrlButton from './delete-url-button';
+import ApplicationCard from './application-card';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RefreshUrlButton from './refresh-url-button';
-import UrlStatusLight from './url-status-light';
 
 ReactDOM.render(
   <React.StrictMode>
-    <DeleteUrlButton />
-    <div style={{
-      marginTop:'10rem',
-      backgroundColor: 'white',
-      height: '100px',
-      padding: '100px',
-    }}>
-      <RefreshUrlButton isLoading={true}/>
-      <UrlStatusLight isDown={true}/>
-    </div>
+    <ApplicationCard
+      app='blog.chrishughesdev.com'
+      isDown={true}
+      isLoading={true}
+      lastStatusChange={new Date(2021, 9, 24)}
+      onDeleteClick={undefined}
+      onRefreshClick={undefined}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -24,4 +24,5 @@ it('renders correctly when loading', () => {
   
   const button = screen.getByRole('button');
   expect(button.textContent).toEqual('');
+  expect(button.disabled).toBe(true);
 });

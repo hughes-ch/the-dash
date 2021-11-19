@@ -1,0 +1,49 @@
+/**
+ *   Defines navigation button styling
+ *
+ *   :copyright: Copyright (c) 2021 Chris Hughes
+ *   :license: MIT License
+ */
+@import './root.css';
+
+.application-card {
+    --application-card-height: 14rem;
+    --application-card-margin: 1rem;
+    
+    align-content: center;
+    align-items: center;
+    background-color: var(--foreground-2);
+    border-radius: var(--dashboard-border-radius);
+    box-shadow: var(--shadow-def);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    font-family: var(--content-font-family);
+    font-size: var(--dashboard-button-font-size);
+    height: var(--application-card-height);
+    justify-content: space-between;
+    margin: var(--application-card-margin);
+    max-width: var(--max-width);
+}
+.application-card div {
+    margin: var(--application-card-margin);
+}
+.application-card > div:nth-child(1) {
+    height: calc(var(--application-card-height) - 2 * var(--application-card-margin));
+}
+.application-card a {
+    color: var(--foreground-1);
+    text-decoration: none;
+}
+.application-card a > div {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    text-align: center;
+}
+.application-card a strong {
+    font-size: calc(var(--dashboard-button-font-size) + 0.25rem);
+}
