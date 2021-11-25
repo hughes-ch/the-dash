@@ -15,10 +15,17 @@ import React from 'react';
  * @return {React.Component}
  */
 function GlobalStatus(props) {
-  const color = props.numAlarms > 0 ? '--alarm-color' : '--all-clear-color';
-  const text = props.numAlarms > 0 ?
-        (props.numAlarms > 1 ? `${props.numAlarms} Alarms` : '1 Alarm') :
-        'No Alarms';
+  let color;
+  let text;
+  if (props.numAlarms === undefined) {
+    color = '--all-clear-color';
+    text = 'N/A';
+  } else {
+    color = props.numAlarms > 0 ? '--alarm-color' : '--all-clear-color';
+    text = props.numAlarms > 0 ?
+      (props.numAlarms > 1 ? `${props.numAlarms} Alarms` : '1 Alarm') :
+      'No Alarms';
+  }
         
   return(
     <BubbleContainer size='small' color={color}>

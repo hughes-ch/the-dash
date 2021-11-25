@@ -5,25 +5,13 @@
  *   :license: MIT License
  */
 import './index.css';
-import ApplicationCard from './application-card';
-import DashboardButton from './dashboard-button';
-import DeleteApplicationPopup from './delete-application-popup';
+import Dashboard from './dashboard';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApplicationCard
-      app='blog.chrishughesdev.com'
-      isDown={true}
-      isLoading={true}
-      lastStatusChange={new Date(2021, 9, 24)}
-      onDeleteClick={undefined}
-      onRefreshClick={undefined}/>
-    <DashboardButton name='Add Another App' onClick={undefined}/>
-    <DeleteApplicationPopup app='chrishughesdev.com'
-                            onSubmit={undefined}
-                            onCancel={undefined}/>
+    <Dashboard apps={[]}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

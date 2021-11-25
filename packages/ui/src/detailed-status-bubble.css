@@ -7,11 +7,15 @@
 @import './root.css';
 
 div.detailed-status-bubble {
-    --font-size: 2rem;
+    --font-size: 1.75rem;
     
     color: var(--foreground-2);
     font-family: var(--content-font-family);
     font-size: var(--font-size);
+}
+div.detailed-status-bubble > * {
+    display: block;
+    text-align: center;
 }
 div.detailed-status-bubble > span:nth-child(even) {
     margin-bottom: var(--font-size);

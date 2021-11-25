@@ -6,45 +6,32 @@
  */
 @import './root.css';
 
-.bubble-container-container {
-    max-width: var(--max-width);
-    width: 100%;
-}
-.bubble-container-container.large {
-    display: flex;
-    padding-top: 5em;
-    justify-content: flex-end;
-    z-index: 1;
-}
-.bubble-container-container.small {
-    position: absolute;
-    display: flex;
-    justify-content: flex-start;
-    z-index: 2;
-}
 .bubble-container {
-    border-radius: 50%;
-    position: relative;
-}
-.bubble-container.large {
-    padding-top: 65%;
-    right: 0%;
-    width: 65%;
-}
-.bubble-container.small {
-    padding-top: 50%;
-    left: 0%;
-    width: 50%;
-}
-.bubble-container div {
     align-content: center;
     align-items: center;
-    bottom: 0;
+    border-radius: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
+    position: relative;
+}
+.bubble-container.large {
+    height: 25rem;
+    width: 25rem;
+    z-index: 1;
+}
+.bubble-container.small {
+    height: 20rem;
+    width: 20rem;
+    z-index: 2;
+}
+@media only screen and (max-width: 600px) {
+    .bubble-container.large {
+        height: 70vw;
+        width: 70vw;
+    }
+    .bubble-container.small {
+        height: 55vw;
+        width: 55vw;
+    }
 }

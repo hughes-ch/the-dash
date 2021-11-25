@@ -16,14 +16,11 @@ import React from 'react';
  */
 function BubbleContainer(props) {
   const bubbleClassName = `bubble-container ${props.size}`;
-  const containerClassName = `bubble-container-container ${props.size}`;
 
   return(
-    <div className={containerClassName}>
-      <div className={bubbleClassName}
-           style={{backgroundColor:getColorFromCss(props.color)}}>
-        <div>{props.children}</div>
-      </div>
+    <div className={bubbleClassName}
+         style={{backgroundColor:getColorFromCss(props.color)}}>
+      {props.children}
     </div>
   );
 }

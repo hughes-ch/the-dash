@@ -8,7 +8,6 @@
 
 .nav-button {
     background-color: var(--foreground-1);
-    border: solid 0.15em var(--foreground-1);
     border-radius: 0.25em;
     box-shadow: 0.15em 0.15em var(--shadow-color);
     color: var(--foreground-2);
@@ -16,10 +15,4 @@
     font-size: 0.5em;
     margin: 0.5em 0.5em 0.5em 0.5em;
     padding: 0.5em 1em 0.5em 1em;
-}
-.nav-button:focus {
-    border-color: var(--focus-color);
-}
-.nav-button:hover {
-    border-color: var(--focus-color);
 }

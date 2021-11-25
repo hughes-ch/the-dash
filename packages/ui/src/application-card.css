@@ -24,6 +24,7 @@
     justify-content: space-between;
     margin: var(--application-card-margin);
     max-width: var(--max-width);
+    width: 100%;
 }
 .application-card div {
     margin: var(--application-card-margin);
@@ -46,4 +47,33 @@
 }
 .application-card a strong {
     font-size: calc(var(--dashboard-button-font-size) + 0.25rem);
+}
+@media only screen and (max-width: 650px) {
+    .application-card {
+        align-items: flex-start;
+        flex-direction: column;
+        height: auto;
+        width: auto;
+    }
+    .application-card > div:nth-child(1) {
+        height: auto;
+    }
+    .application-card a {
+        width: 100%;
+    }
+    .application-card div {
+        align-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+@media only screen and (max-width: 365px) {
+    .application-card {
+        font-size: 5vw;
+    }
+    .application-card a strong {
+        font-size: 5vw;
+    }
 }

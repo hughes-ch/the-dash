@@ -19,7 +19,12 @@ function PopupFormInput(props) {
   return(
     <div className='popup-form-input'>
       <label htmlFor={id}>{props.name}</label>
-      <input type={props.type} id={id} name={id}></input>
+      <input type={props.type}
+             id={id}
+             name={id}
+             onChange={props.onChange}
+             value={props.value}>
+      </input>
     </div>
   );
 }

@@ -7,8 +7,11 @@
 @import './root.css';
 
 .popup-form-button {
-    border: none;
+    -webkit-appearance: none;
+    
     border-radius: var(--dashboard-border-radius);
+    border-style: solid;
+    border-width: 0.15em;
     box-shadow: var(--shadow-def);
     color: var(--foreground-2);
     font-family: var(--content-font-family);
@@ -17,5 +20,12 @@
     margin: 1rem;
     margin-top: 3rem;
     padding: 1rem;
+}
+.popup-form-button:focus {
+    border-color: var(--focus-color);
+}
+.popup-form-button:hover {
+    border-color: var(--focus-color);
+    cursor: pointer;
 }
 

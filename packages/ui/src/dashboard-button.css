@@ -9,8 +9,8 @@
 .dashboard-button {
     --webkit-appearance: none;
     background-color: var(--foreground-2);
+    border-color: var(--foreground-2);
     border-radius: var(--dashboard-border-radius);
-    border: none;
     box-shadow: var(--shadow-def);
     color: var(--foreground-1);
     font-family: var(--content-font-family);
@@ -18,4 +18,5 @@
     font-weight: bold;
     margin: 1rem;
     padding: 1rem;
+    width: 15rem;
 }

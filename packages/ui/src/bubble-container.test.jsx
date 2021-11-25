@@ -20,6 +20,6 @@ it('renders with correct props', () => {
     </BubbleContainer>
   );
   
-  const style = screen.getByText(expectedText).parentNode.style;
+  const style = screen.getByText(expectedText).style;
   expect(style.backgroundColor).toEqual(expectedColor);
 });

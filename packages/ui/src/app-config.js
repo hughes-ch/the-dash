@@ -9,6 +9,7 @@ const testSettings = {
   AUTH_CLIENT_ID: 'test-client-id',
   AUTH_RESPONSE_TYPE: 'token',
   AUTH_SCOPE: 'email+openid',
+  DASHBARD_ERROR_TIMEOUT: 300, // ms
   EXT_URL_EMAIL: 'mailto:contact@chrishughesdev.com',
   EXT_URL_LINKEDIN: 'https://www.linkedin.com/in/hughes-ch/',
   EXT_URL_GITHUB: 'https://github.com/',
@@ -17,6 +18,7 @@ const testSettings = {
 const developmentSettings = { ...testSettings };
 developmentSettings.AUTH_BASE_URL = 'https://auth.dev.the-dash.chrishughesdev.com/';
 developmentSettings.AUTH_CLIENT_ID = '6t0lgt1qeo30rto61ma9k1obpi';
+developmentSettings.DASHBARD_ERROR_TIMEOUT = 5000; // ms
 
 const productionSettings = { ...developmentSettings};
 productionSettings.AUTH_BASE_URL = 'https://auth.the-dash.chrishughesdev.com/';

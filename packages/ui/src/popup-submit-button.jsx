@@ -4,8 +4,8 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
-import {getColorFromCss} from './common';
-import React from 'react';
+import {dynamicBorder, getColorFromCss} from './common';
+import React, {useState} from 'react';
 
 /**
  * Renders the PopupSubmitButton to the DOM
@@ -14,11 +14,18 @@ import React from 'react';
  * @return {React.Component}
  */
 function PopupSubmitButton(props) {
+  const [borderColor, setBorderColor] = useState(getColorFromCss(props.color));
+  
   return(
     <input className='popup-form-button'
-           style={{backgroundColor: getColorFromCss(props.color)}}
+           style={{
+             backgroundColor: getColorFromCss(props.color),
+             borderColor: borderColor
+           }}
            value={props.text}
-           type='submit'/>
+           type='submit'
+           {...dynamicBorder(props.color, setBorderColor)}
+           disabled={props.isDisabled}/>
   );
 }
 
