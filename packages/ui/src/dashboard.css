@@ -14,22 +14,3 @@
     overflow: hidden;
     padding-bottom: 2rem;
 }
-.dashboard > div:nth-child(1) {
-    display: grid;
-    padding-bottom: 2rem;
-    padding-top: 2rem;
-}
-.dashboard .bubble-container {
-    grid-column-start: 1;
-    grid-row-start: 1;
-}
-.dashboard .bubble-container.large {
-    margin-top: 7rem;
-    margin-left: 13rem;
-}
-@media only screen and (max-width: 600px) {
-    .dashboard .bubble-container.large {
-        margin-top: 20vw;
-        margin-left: 35vw;
-    }
-}

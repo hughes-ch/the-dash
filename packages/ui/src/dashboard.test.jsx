@@ -1,4 +1,3 @@
-'use strict';
 /**
  *   Defines tests for the Dashboard
  *

@@ -1,17 +1,17 @@
 /**
- *   Defines the index page
+ *   Starting point of the application
  *
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
 import './index.css';
-import Dashboard from './dashboard';
+import App from './app';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Dashboard apps={[]}/>
+    <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );

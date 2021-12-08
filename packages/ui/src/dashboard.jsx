@@ -10,6 +10,7 @@ import config from './app-config';
 import DashboardButton from './dashboard-button';
 import DeleteApplicationPopup from './delete-application-popup';
 import DetailedStatusBubble from './detailed-status-bubble';
+import DoubleBubble from './double-bubble';
 import ErrorBar from './error-bar';
 import {getApplicationDeleteRequest,
         getApplicationPutRequest,
@@ -19,7 +20,7 @@ import fetch from 'node-fetch';
 import GlobalStatus from './global-status';
 import NavigationBar from './nav-bar';
 import NewApplicationPopup from './new-application-popup';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 /**
  * Checks response for valid parameters
@@ -91,13 +92,11 @@ async function getInitialApplicationList(state) {
     const fetchParams = getSiteListRequest();
     response = await fetch(fetchParams.url, fetchParams.data);
   } catch (err) {
-    state.error.set(`Could not get app list: Internal app error [${err}]`);
-    return;
+    throw new Error(`Could not get app list: Internal app error [${err}]`);
   }
 
   if (response.status !== 200) {
-    state.error.set(`Could not get app list. Status [${response.status}]`);
-    return;
+    throw new Error(`Could not get app list. Status [${response.status}]`);
   }
 
   let appList; 
@@ -106,11 +105,10 @@ async function getInitialApplicationList(state) {
     appList = parseFullAppList(parsedJson, state);
     
   } catch(err) {
-    state.error.set(`Could not get app list: ${err}.`);
-    return;
+    throw new Error(`Could not get app list: ${err}.`);
   }
-  
-  state.applications.set(appList);
+
+  return appList;
 }
 
 /**
@@ -441,9 +439,10 @@ function generatePopupType(state) {
  *
  * @return {React.Component}
  */
-function Dashboard(props) {
+function Dashboard() {
 
   // Define current application state
+  const mounted = useRef(false);
   const [applications, setApplications] = useState(undefined);
   const [error, setError] = useState('');
   const [popupType, setPopupType] = useState('none');
@@ -463,9 +462,28 @@ function Dashboard(props) {
   };
 
   useEffect(() => {
-    getInitialApplicationList(state);
+    mounted.current = true;
+
+    return () => {
+      mounted.current = false;
+    };
   }, []);
-  
+
+  useEffect(async () => {
+    try {
+      const appList = await getInitialApplicationList(state);
+      if (mounted.current) {
+        state.applications.set(appList);
+      }
+      
+    } catch(err) {
+      if (mounted.current) {
+        state.error.set(err.message);
+      }
+    }
+
+  }, []);
+
   useEffect(() => {
     const timeout = setTimeout(
       (e) => setError(''),
@@ -501,12 +519,12 @@ function Dashboard(props) {
       <NavigationBar />
       {errorBar}
       <div className='dashboard'>
-        <div>
+        <DoubleBubble>
           <GlobalStatus numAlarms={numAlarms}/>
           <DetailedStatusBubble numApps={numApps}
                                 lastUpdate={lastUpdate}
                                 nextUpdate={nextUpdate}/>
-        </div>
+        </DoubleBubble>
 
         {applicationCards}
 

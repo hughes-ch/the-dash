@@ -24,10 +24,10 @@ export const buttonFocusMatchers = {
     const root = window.document.createElement('div');
     const style = window.document.createElement('style');
     style.innerHTML = `
-    html {
-      --focus-color: blue;
-    }
-  `;
+      html {
+        --focus-color: blue;
+      }
+    `;
 
     window.document.head.appendChild(style);
     document.body.appendChild(root);

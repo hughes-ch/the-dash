@@ -22,6 +22,15 @@ export function createAuthContext() {
     },
     actions: {
       /**
+       * Checks the credentials using the URL
+       *
+       * @param {String} urlParams Parameters from URL
+       * @return {undefined}
+       */
+      checkCredentials(urlParams) {
+      },
+      
+      /**
        * Starts the initial login request by redirecting the client to
        * AWS cognito.
        *
