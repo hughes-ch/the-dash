@@ -25,11 +25,16 @@ developmentSettings.AUTH_BASE_URL = 'https://auth.dev.the-dash.chrishughesdev.co
 developmentSettings.AUTH_CLIENT_ID = '6t0lgt1qeo30rto61ma9k1obpi';
 developmentSettings.DASHBOARD_ERROR_TIMEOUT = 5000; // ms
 developmentSettings.AUTH_ISSUER = `https://cognito-idp.` +
-  `${testSettings.AUTH_POOL_REGION}.amazonaws.com/${testSettings.AUTH_POOL_ID}`;
+  `${developmentSettings.AUTH_POOL_REGION}.amazonaws.com/` +
+  `${developmentSettings.AUTH_POOL_ID}`;
 
 const productionSettings = { ...developmentSettings};
 productionSettings.AUTH_BASE_URL = 'https://auth.the-dash.chrishughesdev.com/';
 productionSettings.AUTH_CLIENT_ID = 'jo3mat4ds7c0e765v4d3nvjhn';
+productionSettings.AUTH_POOL_ID = 'us-east-1_uMWG347YQ';
+productionSettings.AUTH_ISSUER = `https://cognito-idp.` +
+  `${productionSettings.AUTH_POOL_REGION}.amazonaws.com/` +
+  `${productionSettings.AUTH_POOL_ID}`;
 
 let config;
 if (process.env.REACT_APP_DEPLOY_ENVIRONMENT === 'production') {
