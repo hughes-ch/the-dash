@@ -469,6 +469,7 @@ function Dashboard() {
     };
   }, []);
 
+  // eslint-disable-next-line
   useEffect(async () => {
     try {
       const appList = await getInitialApplicationList(state);
@@ -482,6 +483,7 @@ function Dashboard() {
       }
     }
 
+  // eslint-disable-next-line
   }, []);
 
   useEffect(() => {

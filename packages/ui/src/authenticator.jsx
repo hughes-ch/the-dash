@@ -124,7 +124,8 @@ function Authenticator(props) {
   const auth = useContext(AuthContext);
   const location = useLocation();
   const [authorizedContent, setAuthorizedContent] = useState('');
-  
+
+  // eslint-disable-next-line 
   useEffect(async () => {
     const hash = location.hash.slice(1);
     const [ idTokenParam,
