@@ -1,0 +1,21 @@
+/**
+ *   Defines Global Status Bubble styling
+ *
+ *   :copyright: Copyright (c) 2021 Chris Hughes
+ *   :license: MIT License
+ */
+@import './root.css';
+
+span.global-status {
+    color: var(--foreground-2);
+    font-family: var(--content-font-family);
+    font-size: 3.5rem;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+@media only screen and (max-width: 600px) {
+    span.global-status {
+        font-size: 9vw;
+    }
+}
+

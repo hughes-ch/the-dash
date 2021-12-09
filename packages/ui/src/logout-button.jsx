@@ -4,14 +4,20 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
-import './logout-button.css';
-import React from 'react';
+import AuthContext from './auth-context';
+import NavButton from './nav-button';
+import React, {useContext} from 'react';
 
+/**
+ * Renders the LogoutButton to the DOM
+ *
+ * @return {React.Component}
+ */
 function LogoutButton() {
+  const auth = useContext(AuthContext);
+  
   return(
-    <button className='nav-button'>
-      Log Out
-    </button>
+    <NavButton text='Log out' onClick={auth.actions.logout}/>
   );
 }
 

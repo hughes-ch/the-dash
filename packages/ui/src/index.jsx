@@ -1,19 +1,17 @@
 /**
- *   Defines the index page
+ *   Starting point of the application
  *
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
 import './index.css';
+import App from './app';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LoginButton from './login-button';
-import LogoutButton from './logout-button';
 
 ReactDOM.render(
   <React.StrictMode>
-    <LoginButton />
-    <LogoutButton />
+    <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,0 +1,28 @@
+/**
+ *   Defines Navigation bar styling
+ *
+ *   :copyright: Copyright (c) 2021 Chris Hughes
+ *   :license: MIT License
+ */
+@import './root.css';
+
+.navigation-bar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background);
+    width: 100%;
+    border-bottom: var(--foreground-2) 1px solid;
+    font-family: var(--title-font-family);
+    color: var(--foreground-2);
+    font-size: 2em;
+    text-transform: uppercase;
+    height: 2em;
+}
+.navigation-bar span {
+    padding: 0.5em 0.5em 0.5em 0.5em;
+}
+

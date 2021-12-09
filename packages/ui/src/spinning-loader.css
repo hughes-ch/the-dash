@@ -1,0 +1,31 @@
+/**
+ *   Defines the spinning loader styling
+ *
+ *   :copyright: Copyright (c) 2021 Chris Hughes
+ *   :license: MIT License
+ */
+@import './root.css';
+
+div.spinning-loader {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+div.spinning-loader > div {
+    height: 1.5rem;
+    width: 1.5rem;
+    border: solid #d9d9d9 0.5rem;
+    border-top: solid var(--foreground-1) 0.5rem;
+    border-radius: 50%;
+    animation: rotate 2s infinite linear;
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

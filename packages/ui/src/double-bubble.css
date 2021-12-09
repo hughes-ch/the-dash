@@ -1,0 +1,28 @@
+/**
+ *   Defines DoubleBubble component styling
+ *
+ *   :copyright: Copyright (c) 2021 Chris Hughes
+ *   :license: MIT License
+ */
+@import './root.css';
+
+.double-bubble {
+    display: grid;
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+}
+.double-bubble .bubble-container {
+    grid-column-start: 1;
+    grid-row-start: 1;
+}
+.double-bubble .bubble-container.large {
+    margin-top: 7rem;
+    margin-left: 13rem;
+}
+@media only screen and (max-width: 600px) {
+    .double-bubble .bubble-container.large {
+        margin-top: 20vw;
+        margin-left: 35vw;
+    }
+}
+

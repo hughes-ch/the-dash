@@ -1,0 +1,21 @@
+/**
+ *   Defines error popup styling
+ *
+ *   :copyright: Copyright (c) 2021 Chris Hughes
+ *   :license: MIT License
+ */
+@import './root.css';
+
+.popup-error-dialog {
+    background-color: var(--alarm-color);
+    color: var(--foreground-2);
+    font-family: var(--content-font-family);
+    font-size: 1rem;
+    margin-top: 2rem;
+    opacity: 0.5;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    text-align: center;
+    width: 100%;
+    z-index: 4;
+}

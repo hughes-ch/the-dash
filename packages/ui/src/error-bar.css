@@ -1,0 +1,25 @@
+/**
+ *   Defines navigation button styling
+ *
+ *   :copyright: Copyright (c) 2021 Chris Hughes
+ *   :license: MIT License
+ */
+@import './root.css';
+
+.error-bar {
+    background-color: var(--foreground-2);
+}
+.error-bar > div {
+    background-color: var(--alarm-color);
+    color: var(--foreground-2);
+    font-family: var(--content-font-family);
+    font-size: 1rem;
+    opacity: 0.5;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    position: sticky;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}

@@ -1,0 +1,37 @@
+/**
+ *   Defines bubble container styling
+ *
+ *   :copyright: Copyright (c) 2021 Chris Hughes
+ *   :license: MIT License
+ */
+@import './root.css';
+
+.bubble-container {
+    align-content: center;
+    align-items: center;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+.bubble-container.large {
+    height: 25rem;
+    width: 25rem;
+    z-index: 1;
+}
+.bubble-container.small {
+    height: 20rem;
+    width: 20rem;
+    z-index: 2;
+}
+@media only screen and (max-width: 600px) {
+    .bubble-container.large {
+        height: 70vw;
+        width: 70vw;
+    }
+    .bubble-container.small {
+        height: 55vw;
+        width: 55vw;
+    }
+}
