@@ -18,7 +18,7 @@ import {within} from '@testing-library/dom';
 /**
  * Initial setup
  */
-jest.setTimeout(config.DASHBOARD_ERROR_TIMEOUT * 2);
+jest.setTimeout(config.DASHBOARD_ERROR_TIMEOUT * 10);
 
 const threeDaysAgo = new Date(
   new Date().valueOf() - (3 * 24 * 60 * 60 * 1000));
