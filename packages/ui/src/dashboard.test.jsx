@@ -18,7 +18,7 @@ import {within} from '@testing-library/dom';
 /**
  * Initial setup
  */
-jest.setTimeout(config.DASHBARD_ERROR_TIMEOUT * 2);
+jest.setTimeout(config.DASHBOARD_ERROR_TIMEOUT * 2);
 
 const threeDaysAgo = new Date(
   new Date().valueOf() - (3 * 24 * 60 * 60 * 1000));
@@ -213,7 +213,7 @@ describe('when creating a new app', () => {
     
     await waitFor(() => {
       expect(document.getElementsByClassName('error-bar').length).toEqual(0);
-    }, {timeout: config.DASHBARD_ERROR_TIMEOUT});
+    }, {timeout: config.DASHBOARD_ERROR_TIMEOUT});
   });
 
   it('can handle internal error from fetch', async () => {
@@ -238,7 +238,7 @@ describe('when creating a new app', () => {
 
     await waitFor(() => {
       expect(document.getElementsByClassName('error-bar').length).toEqual(0);
-    }, {timeout: config.DASHBARD_ERROR_TIMEOUT});
+    }, {timeout: config.DASHBOARD_ERROR_TIMEOUT});
   });
 
   it('can handle internal error when parsing json', async () => {
@@ -265,7 +265,7 @@ describe('when creating a new app', () => {
 
     await waitFor(() => {
       expect(document.getElementsByClassName('error-bar').length).toEqual(0);
-    }, {timeout: config.DASHBARD_ERROR_TIMEOUT});
+    }, {timeout: config.DASHBOARD_ERROR_TIMEOUT});
   });
 
   it('can handle malformed response', async () => {
@@ -294,7 +294,7 @@ describe('when creating a new app', () => {
 
     await waitFor(() => {
       expect(document.getElementsByClassName('error-bar').length).toEqual(0);
-    }, {timeout: config.DASHBARD_ERROR_TIMEOUT});
+    }, {timeout: config.DASHBOARD_ERROR_TIMEOUT});
   });
 });
 
@@ -409,7 +409,7 @@ describe('when deleting a new app', () => {
     
     await waitFor(() => {
       expect(document.getElementsByClassName('error-bar').length).toEqual(0);
-    }, {timeout: config.DASHBARD_ERROR_TIMEOUT});
+    }, {timeout: config.DASHBOARD_ERROR_TIMEOUT});
   });
 
   it('can handle internal error from fetch', async () => {
@@ -436,7 +436,7 @@ describe('when deleting a new app', () => {
     
     await waitFor(() => {
       expect(document.getElementsByClassName('error-bar').length).toEqual(0);
-    }, {timeout: config.DASHBARD_ERROR_TIMEOUT});
+    }, {timeout: config.DASHBOARD_ERROR_TIMEOUT});
   });
 
   it('can handle internal error when parsing JSON', async () => {
@@ -466,7 +466,7 @@ describe('when deleting a new app', () => {
     
     await waitFor(() => {
       expect(document.getElementsByClassName('error-bar').length).toEqual(0);
-    }, {timeout: config.DASHBARD_ERROR_TIMEOUT});
+    }, {timeout: config.DASHBOARD_ERROR_TIMEOUT});
   });
 
   it('can handle malformed response', async () => {
@@ -498,7 +498,7 @@ describe('when deleting a new app', () => {
     
     await waitFor(() => {
       expect(document.getElementsByClassName('error-bar').length).toEqual(0);
-    }, {timeout: config.DASHBARD_ERROR_TIMEOUT});
+    }, {timeout: config.DASHBOARD_ERROR_TIMEOUT});
   });
 });
 
@@ -523,7 +523,7 @@ describe('when getting the initial app list', () => {
 
     await waitFor(() => {
       expect(document.getElementsByClassName('error-bar').length).toEqual(0);
-    }, {timeout: config.DASHBARD_ERROR_TIMEOUT});
+    }, {timeout: config.DASHBOARD_ERROR_TIMEOUT});
   });
 
   it('can handle internal error from fetch', async () => {
@@ -539,7 +539,7 @@ describe('when getting the initial app list', () => {
 
     await waitFor(() => {
       expect(document.getElementsByClassName('error-bar').length).toEqual(0);
-    }, {timeout: config.DASHBARD_ERROR_TIMEOUT});
+    }, {timeout: config.DASHBOARD_ERROR_TIMEOUT});
   });
 
   it('can handle internal error when parsing JSON', async () => {
@@ -559,7 +559,7 @@ describe('when getting the initial app list', () => {
 
     await waitFor(() => {
       expect(document.getElementsByClassName('error-bar').length).toEqual(0);
-    }, {timeout: config.DASHBARD_ERROR_TIMEOUT});
+    }, {timeout: config.DASHBOARD_ERROR_TIMEOUT});
   });
 
   it('can handle malformed response', async () => {
@@ -581,7 +581,7 @@ describe('when getting the initial app list', () => {
 
     await waitFor(() => {
       expect(document.getElementsByClassName('error-bar').length).toEqual(0);
-    }, {timeout: config.DASHBARD_ERROR_TIMEOUT});
+    }, {timeout: config.DASHBOARD_ERROR_TIMEOUT});
   });
 });
 
@@ -690,7 +690,7 @@ describe('while refreshing app', () => {
 
     await waitForElementToBeRemoved(
       () => screen.queryByRole('alert'),
-      {timeout: config.DASHBARD_ERROR_TIMEOUT});    
+      {timeout: config.DASHBOARD_ERROR_TIMEOUT});    
   });
 
   it('can handle internal error from fetch', async () => {
@@ -709,7 +709,7 @@ describe('while refreshing app', () => {
     
     await waitForElementToBeRemoved(
       () => screen.queryByRole('alert'),
-      {timeout: config.DASHBARD_ERROR_TIMEOUT});
+      {timeout: config.DASHBOARD_ERROR_TIMEOUT});
   });
 
   it('can handle internal error when parsing response', async () => {
@@ -731,7 +731,7 @@ describe('while refreshing app', () => {
 
     await waitForElementToBeRemoved(
       () => screen.queryByRole('alert'),
-      {timeout: config.DASHBARD_ERROR_TIMEOUT});
+      {timeout: config.DASHBOARD_ERROR_TIMEOUT});
   });
 
   it('can handle malformed response', async () => {
@@ -758,6 +758,6 @@ describe('while refreshing app', () => {
 
     await waitForElementToBeRemoved(
       () => screen.queryByRole('alert'),
-      {timeout: config.DASHBARD_ERROR_TIMEOUT});
+      {timeout: config.DASHBOARD_ERROR_TIMEOUT});
   });
 });

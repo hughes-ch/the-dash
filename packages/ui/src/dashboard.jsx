@@ -487,7 +487,7 @@ function Dashboard() {
   useEffect(() => {
     const timeout = setTimeout(
       (e) => setError(''),
-      config.DASHBARD_ERROR_TIMEOUT);
+      config.DASHBOARD_ERROR_TIMEOUT);
 
     return () => clearTimeout(timeout); 
   }, [error]);

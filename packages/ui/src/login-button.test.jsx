@@ -11,7 +11,7 @@ import {render, screen} from '@testing-library/react';
 /**
  * Initial setup and teardown
  */
-let windowHrefMockValue = 'test.html';
+let windowHrefMockValue = 'test.html/';
 
 beforeEach(() => {
   // Mock window to prevent actual redirects
@@ -30,9 +30,9 @@ it('logs in on click', () => {
   const clientId = config.AUTH_CLIENT_ID;
   const responseType = config.AUTH_RESPONSE_TYPE;
   const scope = config.AUTH_SCOPE;
-  const thisUrl = windowHrefMockValue;
+  const callback = `${windowHrefMockValue}${config.DASHBOARD_URL}`;
   const authUrl = `${baseUrl}login?client_id=${clientId}&` +
-        `response_type=${responseType}&scope=${scope}&redirect_uri=${thisUrl}`;
+        `response_type=${responseType}&scope=${scope}&redirect_uri=${callback}`;
 
   expect(clientId).toEqual('test-client-id');
   expect(window.location.href).toEqual(authUrl);

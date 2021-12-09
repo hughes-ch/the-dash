@@ -22,15 +22,6 @@ export function createAuthContext() {
     },
     actions: {
       /**
-       * Checks the credentials using the URL
-       *
-       * @param {String} urlParams Parameters from URL
-       * @return {undefined}
-       */
-      checkCredentials(urlParams) {
-      },
-      
-      /**
        * Starts the initial login request by redirecting the client to
        * AWS cognito.
        *
@@ -42,11 +33,12 @@ export function createAuthContext() {
         const clientId = config.AUTH_CLIENT_ID;
         const responseType = config.AUTH_RESPONSE_TYPE;
         const scope = config.AUTH_SCOPE;
-        const thisUrl = window.location.href;
+        const redirectUrl = `${window.location.href + config.DASHBOARD_URL}`;
 
         // Redirect to AWS cognito
         const authUrl = `${baseUrl}login?client_id=${clientId}&` +
-              `response_type=${responseType}&scope=${scope}&redirect_uri=${thisUrl}`;
+              `response_type=${responseType}&scope=${scope}&` +
+              `redirect_uri=${redirectUrl}`;
         
         window.location.href = authUrl;
       },

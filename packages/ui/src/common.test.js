@@ -101,4 +101,3 @@ it('tests getSiteListRequest', () => {
   const apiParams = getSiteListRequest();
   expect(apiParams.url).toMatch(new RegExp('http://localhost(:\d+)?/sites'));
 });
-
