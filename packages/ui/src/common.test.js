@@ -5,7 +5,7 @@
  *   :license: MIT License
  */
 import './root.css';
-import config from './app-config';
+import config from '@the-dash/common/app-config';
 import {getApplicationRequest,
         getApplicationDeleteRequest,
         getApplicationPutRequest,
@@ -54,50 +54,55 @@ export const buttonFocusMatchers = {
 /**
  * Unit tests
  */
-it('converts color CSS variables to RGB', () => {
-  const inputColor = '--foreground-1';
-  const outputColor = getColorFromCss(inputColor);
-  expect(outputColor.includes('--')).toBe(false);
-  expect(outputColor).not.toEqual(inputColor);
+describe('for common styling functions', () => {
+  it('converts color CSS variables to RGB', () => {
+    const inputColor = '--foreground-1';
+    const outputColor = getColorFromCss(inputColor);
+    expect(outputColor.includes('--')).toBe(false);
+    expect(outputColor).not.toEqual(inputColor);
+  });
+
+  it('passes standard hex colors untouched', () => {
+    const inputColor = '#ffffff';
+    const outputColor = getColorFromCss(inputColor);
+    expect(outputColor).toEqual(inputColor);
+  });
 });
 
-it('passes standard hex colors untouched', () => {
-  const inputColor = '#ffffff';
-  const outputColor = getColorFromCss(inputColor);
-  expect(outputColor).toEqual(inputColor);
-});
+describe('for common routing functions', () => {
+  it('provides params to get delete application API', () => {
+    const appToDelete = 'my.app';
+    const apiParams = getApplicationDeleteRequest(appToDelete);
 
-it('provides params to get delete application API', () => {
-  const appToDelete = 'my.app';
-  const apiParams = getApplicationDeleteRequest(appToDelete);
+    expect(apiParams.data.method).toEqual('DELETE');
+    expect(apiParams.url).toMatch(
+      new RegExp(`http://localhost(:\d+)?/sites/${appToDelete}`));
+  });
 
-  expect(apiParams.data.method).toEqual('DELETE');
-  expect(apiParams.url).toMatch(
-    new RegExp(`http://localhost(:\d+)?/sites/${appToDelete}`));
-});
+  it('provides params for GET /sites/<app>', () => {
+    const appToGet = 'my.app';
+    const apiParams = getApplicationRequest(appToGet);
 
-it('tests getApplicationRequest', () => {
-  const appToGet = 'my.app';
-  const apiParams = getApplicationRequest(appToGet);
+    expect(apiParams.url).toMatch(
+      new RegExp(`http://localhost(:\d+)?/sites/${appToGet}`));
+  });
 
-  expect(apiParams.url).toMatch(
-    new RegExp(`http://localhost(:\d+)?/sites/${appToGet}`));
-});
+  it('provides params for PUT /sites/<app>', () => {
+    const appToPut = 'my.app';
+    const apiParams = getApplicationPutRequest(appToPut);
 
-it('tests getApplicationPutRequest', () => {
-  const appToPut = 'my.app';
-  const apiParams = getApplicationPutRequest(appToPut);
+    expect(apiParams.data.method).toEqual('PUT');
+    expect(apiParams.url).toMatch(
+      new RegExp(`http://localhost(:\d+)?/sites/${appToPut}`));
 
-  expect(apiParams.data.method).toEqual('PUT');
-  expect(apiParams.url).toMatch(
-    new RegExp(`http://localhost(:\d+)?/sites/${appToPut}`));
+    expect(apiParams.data.body).toEqual(JSON.stringify({
+      url: appToPut
+    }));
+  });
 
-  expect(apiParams.data.body).toEqual(JSON.stringify({
-    url: appToPut
-  }));
-});
-
-it('tests getSiteListRequest', () => {
-  const apiParams = getSiteListRequest();
-  expect(apiParams.url).toMatch(new RegExp('http://localhost(:\d+)?/sites'));
+  it('provides params for GET /sites', () => {
+    const apiParams = getSiteListRequest();
+    expect(apiParams.url).toMatch(new RegExp('http://localhost(:\d+)?/sites'));
+    expect(apiParams.data.headers.authenticate).toContain('Bearer');
+  });
 });

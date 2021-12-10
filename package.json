@@ -16,7 +16,7 @@
     "host": "concurrently --kill-others-on-fail 'yarn:host-*'",
     "host-ui": "yarn workspace @the-dash/ui start",
     "host-api": "bash packages/api/scripts/start",
-    "test": "yarn workspace @the-dash/api test && yarn workspace @the-dash/ui test"
+    "test": "yarn workspace @the-dash/api test && yarn workspace @the-dash/ui test && yarn workspace @the-dash/common test" 
   },
   "version": "1.0.0",
   "workspaces": [

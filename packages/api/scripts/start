@@ -13,6 +13,9 @@ export MY_AWS_ACCESS_KEY_ID=test
 export MY_AWS_REGION=us-east-1
 export MY_AWS_SECRET_ACCESS_KEY=test
 
+# Define local environment
+export REACT_APP_DEPLOY_ENVIRONMENT=development
+
 # Start docker container with AWS dynamo local
 docker run -p $DYNAMO_CONTAINER_PORT:$DYNAMO_HOST_PORT \
        -d --name $CONTAINER_NAME $CONTAINER_IMAGE

@@ -2,6 +2,7 @@
   "author": "Chris Hughes",
   "description": "The back-end API for The Dash",
   "devDependencies": {
+    "aws-sdk-mock": "^5.5.0",
     "jest": "^27.3.1",
     "jest-dynalite": "^3.4.4"
   },

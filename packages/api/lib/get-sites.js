@@ -4,11 +4,35 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
+const authenticate = require("@the-dash/common/authenticate"); 
 const { DynamoDBClient,
-        QueryCommand } = require("@aws-sdk/client-dynamodb");
+        ScanCommand } = require("@aws-sdk/client-dynamodb");
 
-module.exports = async function(event) {
-  // Create client. Set endpoint if for local development only.
+/**
+ * Authorizes client for API request
+ *
+ * @param {Object}  headers  Headers from request
+ * @return {Boolean}
+ */
+async function isAuthorized(headers) {
+  if (!headers.authenticate) {
+    return false;
+  }
+
+  const [bearer, token] = headers.authenticate.split(' ');
+  if (bearer !== 'Bearer') {
+    return false;
+  }
+
+  return authenticate(token);
+}
+
+/**
+ * Creates a DynamoDb client
+ *
+ * @return {DynamoDBClient}
+ */
+function createDynamoClient() {
   let clientConfig = {
     credentials: {
       accessKeyId: process.env.MY_AWS_ACCESS_KEY_ID,
@@ -19,37 +43,60 @@ module.exports = async function(event) {
 
   if (process.env.AWS_ENDPOINT) {
     clientConfig.endpoint = process.env.AWS_ENDPOINT;
+    clientConfig.sslEnabled = false;
   }
-  const client = new DynamoDBClient(clientConfig);
+  
+  return new DynamoDBClient(clientConfig);
+}
 
-  // Get entry from database
-  const queryCommand = new QueryCommand({
-    ExpressionAttributeValues: {
-      ':SiteUrl': {
-        'S': 'blog.chrishughesdev.com',
-      },
-    },
-    KeyConditionExpression: 'SiteUrl = :SiteUrl',
-    ProjectionExpression: 'TimeLastStatusChange',
+/**
+ * Gets all entries in the database
+ *
+ * This function will throw if connection refused
+ *
+ * @return {Array}
+ */
+async function getAllEntriesInDb() {
+  const scanCommand = new ScanCommand({
     TableName: process.env.AWS_SITE_TABLE,
   });
 
-  try {
-    const response = await client.send(queryCommand);
+  const client = createDynamoClient();
+  const items = await client.send(scanCommand);
+  return items.Items ? items.Items : [];
+}
 
-    if (response.Count > 0) {
+/**
+ * Entry point into the Netlify function
+ */
+module.exports = async function(event) {
+  // Verify credentials
+  if (!await isAuthorized(event.headers)) {
+    return {
+      statusCode: 401,
+      body: 'Not authorized',
+    };
+  }
+  
+  // Build response
+  try {
+    const dbEntries = await getAllEntriesInDb();
+    const sites = dbEntries.map(e => {
       return {
-        statusCode: 200,
-        body: JSON.stringify({
-          'message': response.Items[0]['TimeLastStatusChange'].S,
-        }),
+        name: e['SiteUrl'].S,
+        isDown: e['IsDown'].BOOL,
+        lastStatusChange: e['TimeLastStatusChange'].S,
+        lastStatusUpdate: e['TimeLastStatusUpdate'].S,
+        nextAutomatedUpdate: e['TimeNextAutomatedUpdate'].S,
       };
-    } else {
-      return {
-        statusCode: 404,
-        body: 'Not found',
-      };
-    }
+    });
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        sites: sites,
+      }),
+    };
 
   // Error encountered when establishing connection to database
   } catch (err) {

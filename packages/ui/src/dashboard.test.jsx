@@ -5,7 +5,7 @@
  *   :license: MIT License
  */
 import '@testing-library/jest-dom';
-import config from './app-config';
+import config from '@the-dash/common/app-config';
 import Dashboard from './dashboard';
 import {render,
         screen,

@@ -5,7 +5,7 @@
  *   :license: MIT License
  */
 import './social-block.css';
-import config from './app-config';
+import config from '@the-dash/common/app-config';
 import React from 'react';
 
 /**

@@ -6,7 +6,7 @@
  */
 import './dashboard.css';
 import ApplicationCard from './application-card';
-import config from './app-config';
+import config from '@the-dash/common/app-config';
 import DashboardButton from './dashboard-button';
 import DeleteApplicationPopup from './delete-application-popup';
 import DetailedStatusBubble from './detailed-status-bubble';

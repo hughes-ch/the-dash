@@ -4,7 +4,8 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
-import config from './app-config';
+import { absoluteUrl } from '@the-dash/common/requests';
+import config from '@the-dash/common/app-config';
 
 /**
  * Returns the color or looks up the specified variable from the stylesheet
@@ -22,19 +23,16 @@ export function getColorFromCss(color) {
 }
 
 /**
- * Returns the absolute URL of a relative URL
+ * Returns a cookie that contains the site credentials
  *
- * @param {String} url Relative URL
  * @return {String}
  */
-function absoluteUrl(url) {
-  if (url.includes('http')) {
-    return url; 
-  }
-      
-  const protocol = window.location.protocol;
-  const host = window.location.host;
-  return `${protocol}//${host}${url}`;
+export function getCredentialCookie() {
+  const cookies = document.cookie.split(';');
+  const creds = cookies.find(
+    e => e.split('=')[0].trim() === config.CREDENTIAL_COOKIE);
+
+  return creds ? creds.split('=')[1] : '';
 }
 
 /**
@@ -44,7 +42,6 @@ function absoluteUrl(url) {
  * @return {String} 
  */
 export function getApplicationDeleteRequest(app) {
-  
   return {
     url: absoluteUrl(`/sites/${app}`),
     data: {
@@ -90,21 +87,15 @@ export function getApplicationPutRequest(app) {
  * @return {String} 
  */
 export function getSiteListRequest() {
+  const creds = getCredentialCookie();
   return {
     url: absoluteUrl(`/sites`),
-    data: {},
-  };
-}
-
-/**
- * Returns a request to GET JWKs from AWS
- *
- * @return {Object}
- */
-export function getJwksRequest() {
-  return {
-    url: absoluteUrl(`${config.AUTH_ISSUER}/.well-known/jwks.json`),
-    data: {},
+    data: {
+      method: 'GET',
+      headers: {
+        authenticate: `Bearer ${creds}`,
+      },
+    },
   };
 }
 

@@ -1,7 +1,0 @@
-{
-  "test-db-container-name": "dynamodb",
-  "test-db-container-port": 8000,
-  "test-db-host-port": 8000,
-  "test-db-image": "amazon/dynamodb-local:latest",
-  "test-db-site-table": "test-table"
-}
