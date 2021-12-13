@@ -3,7 +3,7 @@
   publish = 'packages/ui/build'
 
 [functions]
-  directory = 'packages/api/functions'
+  directory = 'packages/api/functions/'
   included_files = [
     'packages/common/config.json',
     'packages/common/src/*.js',
@@ -12,6 +12,11 @@
 [[redirects]]
   from = '/sites'
   to = '/.netlify/functions/sites'
+  status = 200
+
+[[redirects]]
+  from = '/site'
+  to = '/.netlify/functions/site'
   status = 200
 
 [[redirects]]

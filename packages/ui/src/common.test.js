@@ -76,24 +76,24 @@ describe('for common routing functions', () => {
 
     expect(apiParams.data.method).toEqual('DELETE');
     expect(apiParams.url).toMatch(
-      new RegExp(`http://localhost(:\d+)?/sites/${appToDelete}`));
+      new RegExp(`http://localhost(:\d+)?/site/${appToDelete}`));
   });
 
-  it('provides params for GET /sites/<app>', () => {
+  it('provides params for GET /site/<app>', () => {
     const appToGet = 'my.app';
     const apiParams = getApplicationRequest(appToGet);
 
     expect(apiParams.url).toMatch(
-      new RegExp(`http://localhost(:\d+)?/sites/${appToGet}`));
+      new RegExp(`http://localhost(:\d+)?/site/${appToGet}`));
   });
 
-  it('provides params for PUT /sites/<app>', () => {
+  it('provides params for PUT /site/<app>', () => {
     const appToPut = 'my.app';
     const apiParams = getApplicationPutRequest(appToPut);
 
     expect(apiParams.data.method).toEqual('PUT');
     expect(apiParams.url).toMatch(
-      new RegExp(`http://localhost(:\d+)?/sites/${appToPut}`));
+      new RegExp(`http://localhost(:\d+)?/site/${appToPut}`));
 
     expect(apiParams.data.body).toEqual(JSON.stringify({
       url: appToPut

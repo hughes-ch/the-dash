@@ -4,71 +4,22 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
-const { CreateTableCommand,
-        DynamoDBClient,
-        PutItemCommand } = require("@aws-sdk/client-dynamodb");
+const { createDynamoClient, setupAwsTestEnv } = require('./dynamodb');
 const getSites = require('./get-sites');
-const { requestValidApiToken,
-        utAuthServer } = require('@the-dash/common/ut-auth-server');
+const { PutItemCommand } = require('@aws-sdk/client-dynamodb');
+const { requestValidApiToken } = require('@the-dash/common/ut-auth-server');
 
 /**
  * Initial setup and teardown
  */
-let dynamoClient;
-async function setupAws() {
-  process.env.AWS_SITE_TABLE = 'test';
-  process.env.MY_AWS_ACCESS_KEY_ID = 'test';
-  process.env.MY_AWS_SECRET_ACCESS_KEY = 'test';
-  process.env.MY_AWS_REGION = 'local';
-  
-  dynamoClient = new DynamoDBClient({
-    credentials: {
-      accessKeyId: process.env.MY_AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.MY_AWS_SECRET_ACCESS_KEY,
-    },
-    region: process.env.MY_AWS_REGION,
-    endpoint: process.env.AWS_ENDPOINT,
-    sslEnabled: false,
-  })
-
-  const tableName = process.env.AWS_SITE_TABLE;
-  const tableCommand = new CreateTableCommand({
-    TableName: tableName,
-    KeySchema: [
-      {
-        AttributeName: 'SiteUrl',
-        KeyType: 'HASH',
-      },
-    ],
-    AttributeDefinitions: [
-      {
-        AttributeName: 'SiteUrl',
-        AttributeType: 'S',
-      },
-    ],
-    ProvisionedThroughput: {
-      ReadCapacityUnits: 1,
-      WriteCapacityUnits: 1,
-    },
-  });
-
-  return dynamoClient.send(tableCommand);
-}
-
-beforeAll(() => {
-  utAuthServer.listen();
-});
+let dynamoClient = createDynamoClient();
 
 beforeEach(async () => {
-  return setupAws();
+  return setupAwsTestEnv(dynamoClient);
 });
 
 afterEach(() => {
   dynamoClient.mockReset();
-});
-
-afterAll(() => {
-  utAuthServer.close();
 });
 
 /**
@@ -81,12 +32,6 @@ describe('for a client requesting GET /sites', () => {
     },
   };
   
-  it('responds with 401 for unauthorized clients', async () => {
-    const event = { headers: '' };
-    const response = await getSites(event);
-    expect(response.statusCode).toEqual(401);
-  });
-
   it('responds with empty list when none are in database', async () => {
     const response = await getSites(authenticatedEvent);
     expect(response.statusCode).toEqual(200);

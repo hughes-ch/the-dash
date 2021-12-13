@@ -43,7 +43,7 @@ export function getCredentialCookie() {
  */
 export function getApplicationDeleteRequest(app) {
   return {
-    url: absoluteUrl(`/sites/${app}`),
+    url: absoluteUrl(`/site/${app}`),
     data: {
       method: 'DELETE',
     },
@@ -58,8 +58,13 @@ export function getApplicationDeleteRequest(app) {
  */
 export function getApplicationRequest(app) {
   return {
-    url: absoluteUrl(`/sites/${app}`),
-    data: {},
+    url: absoluteUrl(`/site/${app}`),
+    data: {
+      method: 'GET',
+      headers: {
+        authenticate: `Bearer ${getCredentialCookie()}`,
+      },
+    },
   };
 }
 
@@ -71,7 +76,7 @@ export function getApplicationRequest(app) {
  */
 export function getApplicationPutRequest(app) {
   return {
-    url: absoluteUrl(`/sites/${app}`),
+    url: absoluteUrl(`/site/${app}`),
     data: {
       method: 'PUT',
       body: JSON.stringify({
@@ -87,13 +92,12 @@ export function getApplicationPutRequest(app) {
  * @return {String} 
  */
 export function getSiteListRequest() {
-  const creds = getCredentialCookie();
   return {
     url: absoluteUrl(`/sites`),
     data: {
       method: 'GET',
       headers: {
-        authenticate: `Bearer ${creds}`,
+        authenticate: `Bearer ${getCredentialCookie()}`,
       },
     },
   };

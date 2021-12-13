@@ -4,9 +4,10 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
+const authenticatedFunction = require('@the-dash/api/lib/authenticated-function');
 const getSites = require('@the-dash/api/lib/get-sites');
 
-exports.handler = async function(event, context) {
+exports.handler = authenticatedFunction(async (event) => {
   if (event.httpMethod === 'GET') {
     return getSites(event);
   } else {
@@ -15,4 +16,4 @@ exports.handler = async function(event, context) {
       body: 'Invalid method for URL',
     };
   }
-};
+});
