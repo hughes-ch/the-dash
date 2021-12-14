@@ -111,6 +111,18 @@ async function testFor500DuringEvents(received, events) {
   }
 }
 
+async function performDbComparison(event, received, comparison) {
+  return prepareTestEnvFor(async() => {
+    const priorEntries = (await getAllEntriesInDb()).length;
+    await received(event);
+    const entriesAfter = (await getAllEntriesInDb()).length;
+    return {
+      message: () => `Entries after: ${entriesAfter} before: ${priorEntries}`,
+      pass: comparison(entriesAfter, priorEntries),
+    };
+  });
+}
+
 /**
  * Define extended matchers
  */
@@ -178,15 +190,7 @@ expect.extend({
    */
   async toCreateNewWebsites(received) {
     const event = { path: `/site/${timedOutWebsite.name}` };
-    return prepareTestEnvFor(async() => {
-      const priorEntries = (await getAllEntriesInDb()).length;
-      await received(event);
-      const entriesAfter = (await getAllEntriesInDb()).length;
-      return {
-        message: () => `Entries after: ${entriesAfter} before: ${priorEntries}`,
-        pass: entriesAfter > priorEntries,
-      };
-    });
+    return performDbComparison(event, received, (a, b) => a > b);
   },
 
   /**
@@ -300,6 +304,14 @@ expect.extend({
         pass: code === 404,
       };
     }); 
+  },
+
+  /**
+   * Checks websites are deleted
+   */
+  async toDeleteWebsites(received) {
+    const event = { path: `/site/${downWebsite.name}` };
+    return performDbComparison(event, received, (a, b) => a < b);
   },
 });
 

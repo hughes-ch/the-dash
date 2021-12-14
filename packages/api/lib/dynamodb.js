@@ -5,6 +5,7 @@
  *   :license: MIT License
  */
 const { CreateTableCommand,
+        DeleteItemCommand,
         DynamoDBClient,
         GetItemCommand,
         PutItemCommand,
@@ -60,7 +61,7 @@ exports.getAllEntriesInDb = async function() {
 exports.getItem = async function(key) {
   const getItemCommand = new GetItemCommand({
     Key: { 
-      SiteUrl : {S: key},
+      SiteUrl: {S: key},
     },
     TableName: process.env.AWS_SITE_TABLE,
   });
@@ -87,6 +88,24 @@ exports.putItem = async function(item) {
 
   client = exports.createDynamoClient();
   return client.send(putItemCommand);
+}
+
+/**
+ * Deletes a single item from a database
+ *
+ * @param {String}  key  Primary key of object
+ * @return {undefined}
+ */
+exports.deleteItem = async function(key) {
+  const deleteItemCommand = new DeleteItemCommand({
+    Key: {
+      SiteUrl: {S: key},
+    },
+    TableName: process.env.AWS_SITE_TABLE,
+  });
+
+  client = exports.createDynamoClient();
+  return client.send(deleteItemCommand);
 }
 
 /**

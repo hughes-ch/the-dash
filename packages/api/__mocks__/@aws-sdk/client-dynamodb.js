@@ -32,18 +32,19 @@ exports.DynamoDBClient = function(config) {
 }
 
 /**
- * Checks that the command has a valid table specified
+ * Checks that fields are defined in command
  *
  * Table does not need to exist
  *
- * @param {Object} command
+ * @param {Object} command    Command to check
+ * @param {Array}  specifics  List of keys in command that must be defined
  * @return {undefined}
  */
-function checkThatTableSpecified(command) {
-  if (!command.TableName) {
-    throw new Error(
-      `Malformed command. Must include a TableName`
-    );
+function checkSpecifics(command, specifics) {
+  for (const specific of specifics) {
+    if (command[specific] === undefined || command[specific] === null) {
+      throw new Error(`Malformed command. Must include a ${specific}`);
+    }
   }
 }
 
@@ -60,6 +61,22 @@ function checkThatTableExists(command) {
         `Table does not exist`
     );
   }
+}
+
+/**
+ * Finds the index within the globalStorage using Key in command
+ * 
+ * @param {Object}  command
+ * @return {Number}
+ */
+function findIndexFromKey(command) {
+  checkThatTableExists(command);
+  const keyName = Object.keys(command.Key)[0];
+  const keyType = Object.keys(command.Key[keyName])[0];
+  const keyValue = command.Key[keyName][keyType];
+  return globalStorage[command.TableName].findIndex(
+    e => e[keyName][keyType] === keyValue
+  );
 }
 
 const commands = {
@@ -84,35 +101,41 @@ const commands = {
   },
 
   /**
+   * Minimal implementation of the DeleteItemCommand
+   */
+  DeleteItemCommand: {
+    // Command must have a Key and TableName
+    validate(command) {
+      checkSpecifics(command, ['TableName', 'Key']);
+    },
+
+    // Makes a function to delete single item from table
+    makeSend(command) {
+      return () => {
+        const index = findIndexFromKey(command);
+        globalStorage[command.TableName].splice(index, 1);
+      };
+    },
+  },
+
+  /**
    * Minimal implementation of the GetItemCommand
    */
   GetItemCommand: {
     // Command must have a Key and TableName
     validate(command) {
-      checkThatTableSpecified(command);
-      if (!command.Key) {
-        throw new Error(
-          `Malformed command. Must include a Key`
-        );
-      }
+      checkSpecifics(command, ['TableName', 'Key']);
     },
 
-    // Makes a command to get a single item from the table
+    // Makes a function to get a single item from the table
     makeSend(command) {
       return () => {
-        checkThatTableExists(command);
-        const keyName = Object.keys(command.Key)[0];
-        const keyType = Object.keys(command.Key[keyName])[0];
-        const keyValue = command.Key[keyName][keyType];
-        const foundValue = globalStorage[command.TableName].find(e => {
-          return e[keyName][keyType] === keyValue;
-        });
-
+        const index = findIndexFromKey(command);
         return {
-          Item: foundValue,
+          Item: globalStorage[command.TableName][index],
         };
       };
-    }
+    },
   },
 
   /**
@@ -137,7 +160,7 @@ const commands = {
   ScanCommand: {
     // Command must include a TableName
     validate(command) {
-      checkThatTableSpecified(command);
+      checkSpecifics(command, ['TableName']);
     },
 
     // Simplistic implementation - returns all items in TableName

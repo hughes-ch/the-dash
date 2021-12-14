@@ -46,6 +46,9 @@ export function getApplicationDeleteRequest(app) {
     url: absoluteUrl(`/site/${app}`),
     data: {
       method: 'DELETE',
+      headers: {
+        authenticate: `Bearer ${getCredentialCookie()}`,
+      },
     },
   };
 }

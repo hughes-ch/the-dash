@@ -6,7 +6,10 @@
  */
 const config = require('@the-dash/common/app-config');
 const fetch = require('node-fetch');
-const { getItem, putItem } = require('./dynamodb');
+const { getAllEntriesInDb,
+        deleteItem,
+        getItem,
+        putItem } = require('./dynamodb');
 
 /**
  * Parses the resource from the URL
@@ -30,6 +33,24 @@ function parseResource(url) {
  */
 function isDangerousString(str) {
   return !str || /[^.-\w]/.test(str);
+}
+
+/**
+ * Runs function. Returns 500 status on error
+ *
+ * @param {Function}  func
+ * @return {Object}
+ */
+async function return500OnErr(func) {
+  try {
+    return await func();
+  } catch (err) {
+    console.log(err);
+    return {
+      statusCode: 500,
+      body: 'Internal server error',
+    };
+  }
 }
 
 /**
@@ -77,7 +98,7 @@ async function isSiteDown(url) {
  * @return {Object}
  */
 async function visitWebsite(event, generateKnownContent) {
-  try {
+  return return500OnErr(async () => {
     const appName = getSafeAppName(event.path);
     const item = await generateKnownContent(appName);
     if (!item) {
@@ -111,15 +132,7 @@ async function visitWebsite(event, generateKnownContent) {
       statusCode: 200,
       body: JSON.stringify(item),
     };
-
-  // Error encountered when establishing connection to database
-  } catch (err) {
-    console.log(err);
-    return {
-      statusCode: 500,
-      body: 'Internal server error',
-    };
-  }
+  });
 }
 
 /**
@@ -151,3 +164,31 @@ exports.updateExisting = async function(event) {
     return await getItem(appName);
   });
 }
+
+/**
+ * Deletes an existing website
+ * 
+ * @param {Object}  event  Event that triggered this function
+ * @return {Object}
+ */
+exports.deleteWebsite = async function(event) {
+  return return500OnErr(async () => {
+    const appName = getSafeAppName(event.path);
+    const item = await getItem(appName);
+    if (!item) {
+      return {
+        statusCode: 404,
+        body: 'Not found',
+      };
+    }
+
+    await deleteItem(appName);
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        sites: await getAllEntriesInDb(),
+      }),
+    };
+  });  
+};
