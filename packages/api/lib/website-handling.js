@@ -4,6 +4,7 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
+const { AbortController } = require('abort-controller');
 const config = require('@the-dash/common/app-config');
 const fetch = require('node-fetch');
 const { getAllEntriesInDb,
@@ -83,10 +84,15 @@ async function isSiteDown(url) {
     const response = await fetch(`https://${url}`, {
       signal: abortController.signal,
     });
+
     clearTimeout(timeoutId);
+    if (!response.ok) {
+      console.log(`Site is down. Got ${response.status}`);
+    }
     return !response.ok;
     
   } catch (err) {
+    console.log(`Site is down. Got ${err}`);
     return true;
   }
 }

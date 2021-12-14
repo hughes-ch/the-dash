@@ -1,12 +1,11 @@
 [build]
-  command = 'yarn build'
+  command = 'yarn build' 
   publish = 'packages/ui/build'
 
 [functions]
   directory = 'packages/api/functions/'
   included_files = [
-    'packages/common/config.json',
-    'packages/common/src/*.js',
+    'packages/common/*',
   ]
 
 [[redirects]]
