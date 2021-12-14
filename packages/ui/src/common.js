@@ -80,8 +80,11 @@ export function getApplicationPutRequest(app) {
     data: {
       method: 'PUT',
       body: JSON.stringify({
-        url: app,
+        name: app,
       }),
+      headers: {
+        authenticate: `Bearer ${getCredentialCookie()}`,
+      },
     },
   };
 }

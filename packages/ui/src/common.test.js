@@ -91,12 +91,13 @@ describe('for common routing functions', () => {
     const appToPut = 'my.app';
     const apiParams = getApplicationPutRequest(appToPut);
 
+    expect(apiParams.data.headers.authenticate).toContain('Bearer');
     expect(apiParams.data.method).toEqual('PUT');
     expect(apiParams.url).toMatch(
       new RegExp(`http://localhost(:\d+)?/site/${appToPut}`));
 
     expect(apiParams.data.body).toEqual(JSON.stringify({
-      url: appToPut
+      name: appToPut
     }));
   });
 

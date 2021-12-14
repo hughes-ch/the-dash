@@ -17,8 +17,12 @@ let globalStorage = { }
  */
 exports.DynamoDBClient = function(config) {
   this.config = config;
-
+  this._lostConnection = false;
+  
   this.send = async function(command) {
+    if (this._lostConnection) {
+      throw new Error('Could not connect to AWS');
+    }
     return command.send();
   }
 

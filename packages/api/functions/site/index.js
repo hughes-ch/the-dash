@@ -6,11 +6,14 @@
  */
 const authenticatedFunction = require('@the-dash/api/lib/authenticated-function');
 const getWebsite = require('@the-dash/api/lib/get-website');
+const putWebsite = require('@the-dash/api/lib/put-website');
 
 exports.handler = authenticatedFunction(async (event) => {
   if (event.httpMethod === 'GET') {
     return getWebsite(event);
-  } else {
+  } else if (event.httpMethod === 'PUT') {
+    return putWebsite(event);
+  } else  {
     return {
       statusCode: 405,
       body: 'Invalid method for URL',

@@ -1,14 +1,14 @@
 /**
- *   Defines the function for GET /sites/<website>
+ *   Defines the function for PUT /site/<website>
  *
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
-const { updateExisting } = require('./website-handling');
+const { addNewWebsite } = require('./website-handling');
 
 /**
  * Entry into Netlify function
  */
 module.exports = async function(event) {
-  return updateExisting(event);
+  return addNewWebsite(event);
 }

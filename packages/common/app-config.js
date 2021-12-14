@@ -20,6 +20,7 @@ const testSettings = {
   EXT_URL_LINKEDIN: 'https://www.linkedin.com/in/hughes-ch/',
   EXT_URL_GITHUB: 'https://github.com/',
   EXT_URL_WEBSITE: 'https://blog.chrishughesdev.com',
+  LONG_RUNNING_FETCH_TIMEOUT: 5000,
 };
   
 const developmentSettings = { ...testSettings };
