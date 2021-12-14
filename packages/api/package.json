@@ -19,6 +19,7 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.41.0",
     "@the-dash/common": "./packages/common",
+    "abort-controller": "^3.0.0",
     "node-fetch": "v2"
   }
 }

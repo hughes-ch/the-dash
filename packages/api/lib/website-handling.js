@@ -4,6 +4,7 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
+const { AbortController } = require('abort-controller');
 const config = require('@the-dash/common/app-config');
 const fetch = require('node-fetch');
 const { getAllEntriesInDb,
