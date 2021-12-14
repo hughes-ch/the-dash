@@ -83,10 +83,15 @@ async function isSiteDown(url) {
     const response = await fetch(`https://${url}`, {
       signal: abortController.signal,
     });
+
     clearTimeout(timeoutId);
+    if (!response.ok) {
+      console.log(`Site is down. Got ${response.status}`);
+    }
     return !response.ok;
     
   } catch (err) {
+    console.log(`Site is down. Got ${err}`);
     return true;
   }
 }
