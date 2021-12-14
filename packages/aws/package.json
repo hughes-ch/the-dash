@@ -1,0 +1,13 @@
+{
+  "name": "@the-dash/aws",
+  "version": "1.0.0",
+  "description": "AWS components of the-dash",
+  "main": "index.js",
+  "repository": "https://github.com/hughes-ch/the-dash",
+  "author": "Chris Hughes",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "v2",
+    "password-prompt": "^1.1.2"
+  }
+}

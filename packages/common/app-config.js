@@ -7,6 +7,7 @@
 const testSettings = {
   AUTH_BASE_URL: '/test-login/',
   AUTH_CLIENT_ID: 'test-client-id',
+  AUTH_ENDPOINT: '/local',
   AUTH_ISSUER: '/local',
   AUTH_POOL_ID: 'us-east-1_DGiGx38U5',
   AUTH_POOL_REGION: 'us-east-1',
@@ -25,18 +26,20 @@ const testSettings = {
   
 const developmentSettings = { ...testSettings };
 developmentSettings.AUTH_BASE_URL = 'https://auth.dev.the-dash.chrishughesdev.com/';
-developmentSettings.AUTH_CLIENT_ID = '6t0lgt1qeo30rto61ma9k1obpi';
+developmentSettings.AUTH_CLIENT_ID = 'nvoaf8eqn01hkqi9gq9odpktb';
 developmentSettings.DASHBOARD_ERROR_TIMEOUT = 5000; // ms
-developmentSettings.AUTH_ISSUER = `https://cognito-idp.` +
-  `${developmentSettings.AUTH_POOL_REGION}.amazonaws.com/` +
+developmentSettings.AUTH_ENDPOINT = `https://cognito-idp.` +
+  `${developmentSettings.AUTH_POOL_REGION}.amazonaws.com/`;
+developmentSettings.AUTH_ISSUER = `${developmentSettings.AUTH_ENDPOINT}` +
   `${developmentSettings.AUTH_POOL_ID}`;
 
 const productionSettings = { ...developmentSettings};
 productionSettings.AUTH_BASE_URL = 'https://auth.the-dash.chrishughesdev.com/';
 productionSettings.AUTH_CLIENT_ID = 'jo3mat4ds7c0e765v4d3nvjhn';
 productionSettings.AUTH_POOL_ID = 'us-east-1_uMWG347YQ';
-productionSettings.AUTH_ISSUER = `https://cognito-idp.` +
-  `${productionSettings.AUTH_POOL_REGION}.amazonaws.com/` +
+productionSettings.AUTH_ENDPOINT = `https://cognito-idp.` +
+  `${productionSettings.AUTH_POOL_REGION}.amazonaws.com/`;
+productionSettings.AUTH_ISSUER = `${productionSettings.AUTH_ENDPOINT}` +
   `${productionSettings.AUTH_POOL_ID}`;
 
 let config;
