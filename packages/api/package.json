@@ -17,6 +17,7 @@
   },
   "version": "1.0.0",
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.41.0"
+    "@aws-sdk/client-dynamodb": "^3.41.0",
+    "@the-dash/common": "./packages/common"
   }
 }
