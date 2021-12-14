@@ -18,6 +18,7 @@
   "version": "1.0.0",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.41.0",
-    "@the-dash/common": "./packages/common"
+    "@the-dash/common": "./packages/common",
+    "node-fetch": "v2"
   }
 }
