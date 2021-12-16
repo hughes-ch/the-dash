@@ -6,16 +6,16 @@
  */
 import './dashboard.css';
 import ApplicationCard from './application-card';
-import config from './app-config';
+import config from '@the-dash/common/app-config';
 import DashboardButton from './dashboard-button';
 import DeleteApplicationPopup from './delete-application-popup';
 import DetailedStatusBubble from './detailed-status-bubble';
 import DoubleBubble from './double-bubble';
 import ErrorBar from './error-bar';
-import {getApplicationDeleteRequest,
-        getApplicationPutRequest,
-        getApplicationRequest,
-        getSiteListRequest} from './common';
+import { getApplicationDeleteRequest,
+         getApplicationPutRequest } from './common';
+import { getApplicationRequest,
+         getSiteListRequest } from '@the-dash/common/requests';
 import fetch from 'node-fetch';
 import GlobalStatus from './global-status';
 import NavigationBar from './nav-bar';

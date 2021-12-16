@@ -4,7 +4,7 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
-import config from './app-config';
+import { absoluteUrl, getCredentialCookie } from '@the-dash/common/requests';
 
 /**
  * Returns the color or looks up the specified variable from the stylesheet
@@ -22,47 +22,20 @@ export function getColorFromCss(color) {
 }
 
 /**
- * Returns the absolute URL of a relative URL
- *
- * @param {String} url Relative URL
- * @return {String}
- */
-function absoluteUrl(url) {
-  if (url.includes('http')) {
-    return url; 
-  }
-      
-  const protocol = window.location.protocol;
-  const host = window.location.host;
-  return `${protocol}//${host}${url}`;
-}
-
-/**
  * Returns a request for an application delete
  *
  * @param {String} app App to delete
  * @return {String} 
  */
 export function getApplicationDeleteRequest(app) {
-  
   return {
-    url: absoluteUrl(`/sites/${app}`),
+    url: absoluteUrl(`/site/${app}`),
     data: {
       method: 'DELETE',
+      headers: {
+        authenticate: `Bearer ${getCredentialCookie()}`,
+      },
     },
-  };
-}
-
-/**
- * Returns a request to get status of single application
- *
- * @param {String} app Requested app
- * @return {String} 
- */
-export function getApplicationRequest(app) {
-  return {
-    url: absoluteUrl(`/sites/${app}`),
-    data: {},
   };
 }
 
@@ -74,37 +47,16 @@ export function getApplicationRequest(app) {
  */
 export function getApplicationPutRequest(app) {
   return {
-    url: absoluteUrl(`/sites/${app}`),
+    url: absoluteUrl(`/site/${app}`),
     data: {
       method: 'PUT',
       body: JSON.stringify({
-        url: app,
+        name: app,
       }),
+      headers: {
+        authenticate: `Bearer ${getCredentialCookie()}`,
+      },
     },
-  };
-}
-
-/**
- * Returns a request to GET all sites
- *
- * @return {String} 
- */
-export function getSiteListRequest() {
-  return {
-    url: absoluteUrl(`/sites`),
-    data: {},
-  };
-}
-
-/**
- * Returns a request to GET JWKs from AWS
- *
- * @return {Object}
- */
-export function getJwksRequest() {
-  return {
-    url: absoluteUrl(`${config.AUTH_ISSUER}/.well-known/jwks.json`),
-    data: {},
   };
 }
 

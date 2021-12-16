@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+FUNC=the-dash-dev-email-service
+IMG=the-dash-dev-email-service:latest
+REGION=us-east-1
+REPO=176387286927.dkr.ecr.$REGION.amazonaws.com
+
+docker tag $IMG $REPO/$IMG
+docker push $REPO/$IMG
+
+aws lambda update-function-code --region $REGION \
+    --function-name $FUNC --image-uri $REPO/$IMG \
+    --output text > /dev/null

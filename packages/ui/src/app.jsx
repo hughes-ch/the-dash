@@ -3,7 +3,7 @@
  */
 import Authenticator from './authenticator';
 import { BrowserRouter as Router } from 'react-router-dom';
-import config from './app-config';
+import config from '@the-dash/common/app-config';
 import { Navigate, Routes, Route } from 'react-router-dom';
 import Dashboard from './dashboard';
 import React from 'react';

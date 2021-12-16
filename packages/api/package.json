@@ -2,8 +2,8 @@
   "author": "Chris Hughes",
   "description": "The back-end API for The Dash",
   "devDependencies": {
-    "jest": "^27.3.1",
-    "jest-dynalite": "^3.4.4"
+    "aws-sdk-mock": "^5.5.0",
+    "jest": "26.6.0"
   },
   "license": "MIT",
   "main": "index.js",
@@ -12,7 +12,7 @@
   "scripts": {
     "setup-local-env": "node test/setupTests.js",
     "teardown-local-env": "node test/teardownTests.js",
-    "test": "yarn jest --coverage --verbose"
+    "test": "yarn run jest --coverage --verbose"
   },
   "version": "1.0.0",
   "dependencies": {

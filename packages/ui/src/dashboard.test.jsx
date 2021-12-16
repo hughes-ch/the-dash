@@ -5,7 +5,7 @@
  *   :license: MIT License
  */
 import '@testing-library/jest-dom';
-import config from './app-config';
+import config from '@the-dash/common/app-config';
 import Dashboard from './dashboard';
 import {render,
         screen,
@@ -41,7 +41,7 @@ const server = setupServer(
       sites: []
     }));
   }),
-  rest.put('/sites/:app', (req, res, ctx) => {
+  rest.put('/site/:app', (req, res, ctx) => {
     const {app} = req.params;
 
     if (app === 'error.com') {
@@ -243,7 +243,7 @@ describe('when creating a new app', () => {
 
   it('can handle internal error when parsing json', async () => {
     server.use(
-      rest.put('/sites/:site', (req, res, ctx) => {
+      rest.put('/site/:site', (req, res, ctx) => {
         return res(ctx.json(null), ctx.status(200));
       }),
     );
@@ -270,7 +270,7 @@ describe('when creating a new app', () => {
 
   it('can handle malformed response', async () => {
     server.use(
-      rest.put('/sites/:site', (req, res, ctx) => {
+      rest.put('/site/:site', (req, res, ctx) => {
         return res(ctx.json({
           sites: undefined
         }));
@@ -333,7 +333,7 @@ describe('when deleting a new app', () => {
       rest.get('/sites', (req, res, ctx) => {
         return res(ctx.json({sites: deleteTestParams.sites}));
       }),
-      rest.delete('/sites/:site', (req, res, ctx) => {
+      rest.delete('/site/:site', (req, res, ctx) => {
         const {site} = req.params;
         const remainingSites = deleteTestParams.sites.filter(
           (e) => e.name !== site);
@@ -386,7 +386,7 @@ describe('when deleting a new app', () => {
   it('can handle error from server', async () => {
     setupDeleteServer();
     server.use(
-      rest.delete('/sites/:site', (req, res, ctx) => {
+      rest.delete('/site/:site', (req, res, ctx) => {
         return res(ctx.status(500));
       }),
     );
@@ -442,7 +442,7 @@ describe('when deleting a new app', () => {
   it('can handle internal error when parsing JSON', async () => {
     setupDeleteServer();
     server.use(
-      rest.delete('/sites/:site', (req, res, ctx) => {
+      rest.delete('/site/:site', (req, res, ctx) => {
         return res(ctx.json(null));
       }),
     );
@@ -472,7 +472,7 @@ describe('when deleting a new app', () => {
   it('can handle malformed response', async () => {
     setupDeleteServer();
     server.use(
-      rest.delete('/sites/:site', (req, res, ctx) => {
+      rest.delete('/site/:site', (req, res, ctx) => {
         return res(ctx.json({
           sites: undefined,
         }));
@@ -617,9 +617,9 @@ describe('while refreshing app', () => {
           sites: refreshTestParams.sites,
         }));
       }),
-      rest.get('/sites/:app', (req, res, ctx) => {
+      rest.get('/site/:app', (req, res, ctx) => {
         const {app} = req.params;
-        mockRefresh(`/sites/${app}`);
+        mockRefresh(`/site/${app}`);
         return res(ctx.json({
           name: app,
           isDown: false,
@@ -674,7 +674,7 @@ describe('while refreshing app', () => {
   it('can handle error from server', async () => {
     setupRefreshServer();
     server.use(
-      rest.get('/sites/:app', (req, res, ctx) => {
+      rest.get('/site/:app', (req, res, ctx) => {
         return res(ctx.status(500));
       }),
     );
@@ -715,7 +715,7 @@ describe('while refreshing app', () => {
   it('can handle internal error when parsing response', async () => {
     setupRefreshServer();
     server.use(
-      rest.get('/sites/:app', (req, res, ctx) => {
+      rest.get('/site/:app', (req, res, ctx) => {
         return res(ctx.json(null));
       }),
     );
@@ -737,7 +737,7 @@ describe('while refreshing app', () => {
   it('can handle malformed response', async () => {
     setupRefreshServer();
     server.use(
-      rest.get('/sites/:app', (req, res, ctx) => {
+      rest.get('/site/:app', (req, res, ctx) => {
         return res(ctx.json({
           isDown: true,
           lastStatusChange: undefined,

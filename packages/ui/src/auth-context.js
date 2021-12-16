@@ -4,7 +4,7 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
-import config from './app-config';
+import config from '@the-dash/common/app-config';
 import React from 'react';
 
 /**

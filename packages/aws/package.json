@@ -1,0 +1,26 @@
+{
+  "name": "@the-dash/aws",
+  "version": "1.0.0",
+  "description": "AWS components of the-dash",
+  "main": "index.js",
+  "repository": "https://github.com/hughes-ch/the-dash",
+  "author": "Chris Hughes",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-ses": "^3.43.0",
+    "abort-controller": "^3.0.0",
+    "node-fetch": "2"
+  },
+  "scripts": {
+    "build": "yarn test && yarn webpack && docker build . -t the-dash-dev-email-service",
+    "deploy": "scripts/deploy",
+    "start": "docker run -d -p 9000:8080 --env-file .env the-dash-dev-email-service:latest && curl -XPOST 'http://localhost:9000/2015-03-31/functions/function/invocations' -d '{}'",
+    "test": "yarn run jest --coverage --verbose"
+  },
+  "devDependencies": {
+    "jest": "26.6.0",
+    "msw": "^0.36.3",
+    "webpack": "4.44.2",
+    "webpack-cli": "^4.9.1"
+  }
+}

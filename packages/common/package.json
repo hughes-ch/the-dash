@@ -5,5 +5,18 @@
   "main": "index.js",
   "repository": "https://github.com/hughes-ch/the-dash",
   "author": "Chris Hughes",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "abort-controller": "^3.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwk-to-pem": "^2.0.5",
+    "node-fetch": "2"
+  },
+  "scripts": {
+    "test": "yarn run jest --coverage --verbose"
+  },
+  "devDependencies": {
+    "jest": "26.6.0",
+    "msw": "^0.36.3"
+  }
 }
