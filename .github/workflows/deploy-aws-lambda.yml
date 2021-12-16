@@ -2,9 +2,9 @@ name: Deploy AWS Lambda
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ main, dev ]
   pull_request:
-    branches: [ dev ]
+    branches: [ main, dev ]
 
 env:
   AWS_REGION: us-east-1

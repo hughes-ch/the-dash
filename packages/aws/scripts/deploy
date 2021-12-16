@@ -1,6 +1,14 @@
 #!/usr/bin/bash
-FUNC=the-dash-dev-email-service
-IMG=the-dash-dev-email-service:latest
+DEPLOY_ENV=${GITHUB_REF##*/}
+if [ -z "$DEPLOY_ENV" ]
+then
+  DEPLOY_ENV=dev
+fi
+
+echo Deploying to $DEPLOY_ENV
+
+FUNC=the-dash-$DEPLOY_ENV-email-service
+IMG=$FUNC:latest
 REGION=us-east-1
 REPO=176387286927.dkr.ecr.$REGION.amazonaws.com
 

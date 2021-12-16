@@ -40,7 +40,7 @@ devSettings.AUTH_ISSUER = `${devSettings.AUTH_ENDPOINT}` +
 const prodSettings = { ...devSettings};
 prodSettings.APP_NAME = 'the-dash.chrishughesdev.com';
 prodSettings.AUTH_BASE_URL = `https://auth.${prodSettings.APP_NAME}/`;
-prodSettings.AUTH_CLIENT_ID = 'jo3mat4ds7c0e765v4d3nvjhn';
+prodSettings.AUTH_CLIENT_ID = '1grtt9jk49pl1uju9aitn6vkq3';
 prodSettings.AUTH_POOL_ID = 'us-east-1_uMWG347YQ';
 prodSettings.AUTH_ENDPOINT = `https://cognito-idp.` +
   `${prodSettings.AUTH_POOL_REGION}.amazonaws.com/`;
