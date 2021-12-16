@@ -8,7 +8,6 @@
   "license": "MIT",
   "dependencies": {
     "@aws-sdk/client-ses": "^3.43.0",
-    "@the-dash/common": "workspace:^",
     "abort-controller": "^3.0.0",
     "node-fetch": "2"
   },
