@@ -6,7 +6,7 @@
  */
 const { AbortController } = require('abort-controller');
 const config = require('./app-config');
-const fetch = require('node-fetch');
+const fetch = require('node-fetch').default;
 
 /**
  * Returns the absolute URL of a relative URL

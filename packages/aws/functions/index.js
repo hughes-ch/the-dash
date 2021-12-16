@@ -104,15 +104,17 @@ async function getStatusOf(name, token) {
   try {
     const response = await fetchWithTimeout(fetchParams.url, fetchParams.data);
     if (!response.ok) {
-      console.log(`Error getting ${name} [${response.status}]`);
-      return null;
+      throw Error(`Error getting ${name} [${response.status}]`);
     }
 
     return response.json();
 
   } catch(err) {
     console.log(`Error getting ${name}: ${err}`);
-    return null;
+    return {
+      name: name,
+      isDown: true,
+    };
   }
 }
 
@@ -129,7 +131,6 @@ async function notifyOfDownApp(websiteName) {
       secretAccessKey: process.env.MY_AWS_SECRET_ACCESS_KEY,
     },
     region: process.env.MY_AWS_REGION,
-    logger: null,
   });
 
   const command = new SendEmailCommand({
@@ -154,14 +155,13 @@ async function notifyOfDownApp(websiteName) {
     Source: config.EMAIL_SOURCE,
   });
 
-  const response = await client.send(command);
-  return response;
+  return client.send(command);
 }
 
 /**
  * Entry point into AWS lambda
  */
-exports.handler = async function(event, context) {
+module.exports = async function(event, context) {
   const apiToken = await getApiToken();
   if (!apiToken) {
     console.log('Could not get AWS access token');
@@ -176,7 +176,7 @@ exports.handler = async function(event, context) {
 
   const promises = [];
   for (const update of updates) {
-    if (update && update.isDown && isNewlyChanged(startOfPoll, update)) {
+    if (update && update.isDown) {
       promises.push(notifyOfDownApp(update.name));
     }
   }

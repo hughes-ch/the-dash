@@ -7,32 +7,32 @@
 const config = require('@the-dash/common/app-config');
 const { getApplicationRequest,
         getSiteListRequest } = require('@the-dash/common/requests');
-const { handler } = require('./index');
+const handler = require('./index');
 const { rest } = require('msw');
 const { setupServer } = require('msw/node');
 
 /**
  * Define constants
  */
-let longPromises;
 const mock401 = jest.fn();
 const mockEmail = jest.fn();
 const mockGetApp = jest.fn();
-const mockGetSites = jest.fn();
+
+let longPromises;
 let responseDelay;
 let statusNewlyChanged;
 
 const sites = [
   {
     name: 'my.web.site',
-    isDown: true,
+    isDown: false,
     lastStatusChange: '2020-04-04 10:49:00 EST',
     lastStatusUpdate: '2020-04-04 10:49:00 EST',
     nextAutomatedUpdate: '2020-04-04 10:49:00 EST',
   },
   {
     name: 'i.like.pizza',
-    isDown: false,
+    isDown: true,
     lastStatusChange: '2020-04-04 10:49:00 EST',
     lastStatusUpdate: '2020-04-04 10:49:00 EST',
     nextAutomatedUpdate: '2020-04-04 10:49:00 EST',
@@ -45,9 +45,7 @@ const server = setupServer(
       return res(ctx.status(401));
     }
     
-    mockGetSites();
-    await sleep(responseDelay);
-    
+    await sleep();
     return res(
       ctx.status(200),
       ctx.json({
@@ -134,6 +132,9 @@ async function sleep(ms) {
  * Initial setup and teardown
  */
 beforeAll(() => {
+  process.env.MY_AWS_ACCESS_KEY_ID='test';
+  process.env.MY_AWS_SECRET_ACCESS_KEY='test';
+  process.env.MY_AWS_REGION='us-east-1';
   server.listen();
 });
 beforeEach(() => {
@@ -144,7 +145,6 @@ beforeEach(() => {
 afterEach(async () => {
   mock401.mockReset();
   mockGetApp.mockReset();
-  mockGetSites.mockReset();
   server.resetHandlers();
 
   return Promise.all(longPromises);
@@ -157,7 +157,7 @@ afterAll(() => {
  * Unit tests
  */
 describe('the automated email service', () => {
-  it('uses an token to make calls to the API', async () => {
+  it('uses a token to make calls to the API', async () => {
     await handler();
     expect(mock401).not.toHaveBeenCalled();
   });
@@ -170,15 +170,12 @@ describe('the automated email service', () => {
   it('can handle long-running API requests', async () => {
     responseDelay = config.LONG_RUNNING_FETCH_TIMEOUT * 1.5;
     await handler();
-    expect(mockGetSites).toHaveBeenCalled();
+    expect(mockGetApp).toHaveBeenCalled();
+    expect(mockEmail).toHaveBeenCalled();
     
   }, config.LONG_RUNNING_FETCH_TIMEOUT * 2);
 
   it('sends an email to users when a site goes down', async () => {
-    process.env.MY_AWS_ACCESS_KEY_ID='test';
-    process.env.MY_AWS_SECRET_ACCESS_KEY='test';
-    process.env.MY_AWS_REGION='us-east-1';
-    
     statusNewlyChanged = true;
     await handler();
     expect(mockEmail).toHaveBeenCalled();

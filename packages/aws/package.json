@@ -7,12 +7,21 @@
   "author": "Chris Hughes",
   "license": "MIT",
   "dependencies": {
-    "@aws-sdk/client-ses": "^3.43.0"
+    "@aws-sdk/client-ses": "^3.43.0",
+    "@the-dash/common": "workspace:^",
+    "abort-controller": "^3.0.0",
+    "node-fetch": "2"
   },
   "scripts": {
-    "test": "yarn jest --coverage --verbose"
+    "build": "yarn test && yarn webpack && docker build . -t the-dash-dev-email-service",
+    "deploy": "scripts/deploy",
+    "start": "docker run -d -p 9000:8080 --env-file .env the-dash-dev-email-service:latest && curl -XPOST 'http://localhost:9000/2015-03-31/functions/function/invocations' -d '{}'",
+    "test": "yarn run jest --coverage --verbose"
   },
   "devDependencies": {
-    "msw": "^0.36.3"
+    "jest": "26.6.0",
+    "msw": "^0.36.3",
+    "webpack": "4.44.2",
+    "webpack-cli": "^4.9.1"
   }
 }
