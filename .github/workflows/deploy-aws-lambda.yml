@@ -27,6 +27,7 @@ jobs:
 
     - name: Build and push image to AWS ECR
       run: |
+        yarn install
         yarn aws-build
         yarn aws-deploy
         
