@@ -5,7 +5,6 @@
  *   :license: MIT License
  */
 import { absoluteUrl, getCredentialCookie } from '@the-dash/common/requests';
-import config from '@the-dash/common/app-config';
 
 /**
  * Returns the color or looks up the specified variable from the stylesheet
