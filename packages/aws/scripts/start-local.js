@@ -4,16 +4,17 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
+const fs = require('fs');
 const { handler } = require('../functions/index');
-const prompt = require('password-prompt');
 
-async function run() {
-  const username = await prompt('username: ');
-  const password = await prompt('password: ');
-  process.env.AWS_COGNITO_USER = username;
-  process.env.AWS_COGNITO_PASS = password;
-
-  return handler(null, null);
+try {
+  const data = fs.readFileSync(`${__dirname}/.env`, 'utf8').split('\n');
+  data.forEach(e => {
+    const [env, val] = e.split('=', 2);
+    process.env[env] = val;
+  });
+  handler(null, null);
+  
+} catch (err) {
+  console.log(err);
 }
-
-run();

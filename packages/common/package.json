@@ -7,11 +7,15 @@
   "author": "Chris Hughes",
   "license": "MIT",
   "dependencies": {
+    "abort-controller": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
     "jwk-to-pem": "^2.0.5",
     "node-fetch": "v2"
   },
   "scripts": {
     "test": "yarn jest --coverage --verbose"
+  },
+  "devDependencies": {
+    "msw": "^0.36.3"
   }
 }

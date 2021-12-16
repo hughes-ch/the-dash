@@ -4,7 +4,8 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
-const { createDynamoClient, setupAwsTestEnv } = require('./dynamodb');
+const { createDynamoClient,
+        setupAwsTestEnv } = require('./dynamodb');
 const getSites = require('./get-sites');
 const { PutItemCommand } = require('@aws-sdk/client-dynamodb');
 const { requestValidApiToken } = require('@the-dash/common/ut-auth-server');

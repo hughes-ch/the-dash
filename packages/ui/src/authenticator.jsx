@@ -7,7 +7,7 @@
 import AuthContext from './auth-context';
 import authenticate from '@the-dash/common/authenticate';
 import config from '@the-dash/common/app-config';
-import {getCredentialCookie} from './common';
+import {getCredentialCookie} from '@the-dash/common/requests';
 import React, {useContext, useEffect, useState} from 'react';
 import {Navigate, useLocation} from 'react-router-dom';
 

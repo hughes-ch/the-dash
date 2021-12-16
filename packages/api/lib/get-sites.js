@@ -4,7 +4,7 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
-const { getAllEntriesInDb, stripItem } = require('./dynamodb');
+const { getAllEntriesInDb } = require('./dynamodb');
 
 module.exports = async function(event) {
   try {

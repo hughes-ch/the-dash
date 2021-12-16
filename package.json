@@ -11,12 +11,13 @@
   "private": true,
   "repository": "https://github.com/hughes-ch/the-dash.git",
   "scripts": {
-    "build": "yarn workspace @the-dash/ui build",
-    "prebuild": "yarn install && yarn test",
+    "build": "yarn test && yarn workspace @the-dash/ui build",
+    "prebuild": "yarn workspace @the-dash/api add './packages/common' && yarn install",
     "host": "concurrently --kill-others-on-fail 'yarn:host-*'",
     "host-ui": "yarn workspace @the-dash/ui start",
     "host-api": "bash packages/api/scripts/start",
-    "test": "yarn workspace @the-dash/api test && yarn workspace @the-dash/ui test && yarn workspace @the-dash/common test" 
+    "start-aws": "node packages/aws/scripts/start-local",
+    "test": "yarn workspace @the-dash/api test && yarn workspace @the-dash/ui test && yarn workspace @the-dash/common test && yarn workspace @the-dash/aws test"
   },
   "version": "1.0.0",
   "workspaces": [

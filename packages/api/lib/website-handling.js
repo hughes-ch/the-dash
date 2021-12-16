@@ -4,9 +4,8 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
-const { AbortController } = require('abort-controller');
 const config = require('@the-dash/common/app-config');
-const fetch = require('node-fetch');
+const { fetchWithTimeout } = require('@the-dash/common/requests');
 const { getAllEntriesInDb,
         deleteItem,
         getItem,
@@ -76,16 +75,7 @@ function getSafeAppName(path) {
  */
 async function isSiteDown(url) {
   try {
-    const abortController = new AbortController();
-    const timeoutId = setTimeout(() => {
-      abortController.abort();
-    }, config.LONG_RUNNING_FETCH_TIMEOUT);
-               
-    const response = await fetch(`https://${url}`, {
-      signal: abortController.signal,
-    });
-
-    clearTimeout(timeoutId);
+    const response = await fetchWithTimeout(`https://${url}`);
     if (!response.ok) {
       console.log(`Site is down. Got ${response.status}`);
     }

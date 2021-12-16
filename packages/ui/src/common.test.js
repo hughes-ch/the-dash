@@ -6,12 +6,10 @@
  */
 import './root.css';
 import config from '@the-dash/common/app-config';
-import {getApplicationRequest,
-        getApplicationDeleteRequest,
-        getApplicationPutRequest,
-        getColorFromCss,
-        getSiteListRequest} from './common';
-import {fireEvent, render, screen} from '@testing-library/react';
+import { getApplicationDeleteRequest,
+         getApplicationPutRequest,
+         getColorFromCss } from './common';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 /**
  * Common infrastructure
@@ -79,14 +77,6 @@ describe('for common routing functions', () => {
       new RegExp(`http://localhost(:\d+)?/site/${appToDelete}`));
   });
 
-  it('provides params for GET /site/<app>', () => {
-    const appToGet = 'my.app';
-    const apiParams = getApplicationRequest(appToGet);
-
-    expect(apiParams.url).toMatch(
-      new RegExp(`http://localhost(:\d+)?/site/${appToGet}`));
-  });
-
   it('provides params for PUT /site/<app>', () => {
     const appToPut = 'my.app';
     const apiParams = getApplicationPutRequest(appToPut);
@@ -99,11 +89,5 @@ describe('for common routing functions', () => {
     expect(apiParams.data.body).toEqual(JSON.stringify({
       name: appToPut
     }));
-  });
-
-  it('provides params for GET /sites', () => {
-    const apiParams = getSiteListRequest();
-    expect(apiParams.url).toMatch(new RegExp('http://localhost(:\d+)?/sites'));
-    expect(apiParams.data.headers.authenticate).toContain('Bearer');
   });
 });

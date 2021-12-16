@@ -4,7 +4,7 @@
  *   :copyright: Copyright (c) 2021 Chris Hughes
  *   :license: MIT License
  */
-import { absoluteUrl } from '@the-dash/common/requests';
+import { absoluteUrl, getCredentialCookie } from '@the-dash/common/requests';
 import config from '@the-dash/common/app-config';
 
 /**
@@ -20,19 +20,6 @@ export function getColorFromCss(color) {
       .getPropertyValue(color);
   }
   return returnVal;
-}
-
-/**
- * Returns a cookie that contains the site credentials
- *
- * @return {String}
- */
-export function getCredentialCookie() {
-  const cookies = document.cookie.split(';');
-  const creds = cookies.find(
-    e => e.split('=')[0].trim() === config.CREDENTIAL_COOKIE);
-
-  return creds ? creds.split('=')[1] : '';
 }
 
 /**
@@ -54,24 +41,6 @@ export function getApplicationDeleteRequest(app) {
 }
 
 /**
- * Returns a request to get status of single application
- *
- * @param {String} app Requested app
- * @return {String} 
- */
-export function getApplicationRequest(app) {
-  return {
-    url: absoluteUrl(`/site/${app}`),
-    data: {
-      method: 'GET',
-      headers: {
-        authenticate: `Bearer ${getCredentialCookie()}`,
-      },
-    },
-  };
-}
-
-/**
  * Returns a request to PUT new application
  *
  * @param {String} app New app
@@ -85,23 +54,6 @@ export function getApplicationPutRequest(app) {
       body: JSON.stringify({
         name: app,
       }),
-      headers: {
-        authenticate: `Bearer ${getCredentialCookie()}`,
-      },
-    },
-  };
-}
-
-/**
- * Returns a request to GET all sites
- *
- * @return {String} 
- */
-export function getSiteListRequest() {
-  return {
-    url: absoluteUrl(`/sites`),
-    data: {
-      method: 'GET',
       headers: {
         authenticate: `Bearer ${getCredentialCookie()}`,
       },
