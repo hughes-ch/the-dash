@@ -5,8 +5,9 @@
  *   :license: MIT License
  */
 import config from '@the-dash/common/app-config';
+import { getCredentialCookie } from '@the-dash/common/requests';
 import LogoutButton from './logout-button';
-import {render, screen} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 /**
  * Initial setup and teardown
@@ -27,6 +28,7 @@ beforeEach(() => {
  * Unit tests
  */
 it('logs out on click', () => {
+  document.cookie = `${config.CREDENTIAL_COOKIE}=cookie`;
   render(<LogoutButton/>);
   screen.getByText('Log out').click();
   
@@ -39,4 +41,5 @@ it('logs out on click', () => {
 
   expect(clientId).toEqual('test-client-id');
   expect(window.location.href).toEqual(logoutUrl);
+  expect(getCredentialCookie()).toBeFalsy();
 });

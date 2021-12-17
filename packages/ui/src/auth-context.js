@@ -49,6 +49,7 @@ export function createAuthContext() {
        * @return {undefined}
        */
       logout: () => {
+        document.cookie = `${config.CREDENTIAL_COOKIE}=`;
         const authBaseUrl = config.AUTH_BASE_URL;
         const clientId = config.AUTH_CLIENT_ID;
         const appBaseUrl = window.location.origin + '/';
