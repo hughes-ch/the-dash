@@ -13,8 +13,12 @@ IMG=$FUNC:latest
 REGION=us-east-1
 REPO=176387286927.dkr.ecr.$REGION.amazonaws.com
 
+aws ecr get-login-password | \
+    docker login --username AWS --password-stdin $REPO
+
 docker tag $IMG $REPO/$IMG
 docker push $REPO/$IMG
+docker logout $REPO
 
 aws lambda update-function-code --region $REGION \
     --function-name $FUNC --image-uri $REPO/$IMG \
