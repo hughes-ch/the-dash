@@ -12,7 +12,7 @@
     "node-fetch": "2"
   },
   "scripts": {
-    "build": "yarn test && yarn webpack && docker build . -t the-dash-dev-email-service",
+    "build": "scripts/build",
     "deploy": "scripts/deploy",
     "start": "docker run -d -p 9000:8080 --env-file .env the-dash-dev-email-service:latest && curl -XPOST 'http://localhost:9000/2015-03-31/functions/function/invocations' -d '{}'",
     "test": "yarn run jest --coverage --verbose"

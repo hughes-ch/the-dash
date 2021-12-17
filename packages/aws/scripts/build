@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+if [ "${GITHUB_REF##*/}" = "main" ]
+then
+  DEPLOY_ENV=production
+else
+  DEPLOY_ENV=dev
+fi
+
+echo Building $DEPLOY_ENV
+FUNC=the-dash-$DEPLOY_ENV-email-service
+IMG=$FUNC:latest
+
+yarn test
+yarn webpack
+docker build . -t $IMG
