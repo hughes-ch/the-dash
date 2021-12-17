@@ -29,9 +29,6 @@ span.splash-screen {
     text-transform: uppercase;
 }
 @media only screen and (max-width: 600px) {
-    div.splash-screen {
-        background-color: var(--background);
-    }
     span.splash-screen {
         font-size: 10vw;
     }
