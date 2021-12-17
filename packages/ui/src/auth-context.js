@@ -33,7 +33,7 @@ export function createAuthContext() {
         const clientId = config.AUTH_CLIENT_ID;
         const responseType = config.AUTH_RESPONSE_TYPE;
         const scope = config.AUTH_SCOPE;
-        const redirectUrl = `${window.location.href + config.DASHBOARD_URL}`;
+        const redirectUrl = window.location.href;
 
         // Redirect to AWS cognito
         const authUrl = `${baseUrl}login?client_id=${clientId}&` +

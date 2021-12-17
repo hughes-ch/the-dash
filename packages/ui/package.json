@@ -12,7 +12,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "REACT_APP_DEPLOY_ENVIRONMENT=test; react-scripts test --watchAll=false --coverage",
+    "test": "export REACT_APP_DEPLOY_ENVIRONMENT=test; react-scripts test --watchAll=false --coverage",
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:9999/.netlify/functions",

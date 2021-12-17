@@ -5,15 +5,16 @@
  *   :license: MIT License
  */
 import '@testing-library/jest-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import config from '@the-dash/common/app-config';
 import Dashboard from './dashboard';
-import {render,
-        screen,
-        waitFor,
-        waitForElementToBeRemoved} from '@testing-library/react';
-import {rest} from 'msw';
-import {setupServer} from 'msw/node';
-import {within} from '@testing-library/dom';
+import { render,
+         screen,
+         waitFor,
+         waitForElementToBeRemoved } from '@testing-library/react';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+import { within } from '@testing-library/dom';
 
 /**
  * Initial setup
@@ -75,7 +76,11 @@ afterAll(() => {
  * Unit tests
  */
 it('renders correctly with 0 components', async () => {
-  render(<Dashboard/>);
+  render(
+    <Router>
+      <Dashboard/>
+    </Router>
+  );
 
   expect(screen.getByRole('navigation')).toBeInTheDocument();
   expect(document.getElementsByClassName('error-bar').length).toEqual(0);
@@ -115,8 +120,12 @@ it('displays a down application', async () => {
         ]
       }));
     }));
-  
-  render(<Dashboard/>);
+
+  render(
+    <Router>
+      <Dashboard/>
+    </Router>
+  );
 
   await waitFor(() => screen.getByText(downAppName));
   
@@ -157,7 +166,11 @@ describe('when creating a new app', () => {
       }),
     );
 
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     expect(await screen.findByText('No Alarms')).toBeInTheDocument();
 
     const newAppName = 'app.com';
@@ -183,7 +196,11 @@ describe('when creating a new app', () => {
   });
 
   it('can be cancelled', async () => {
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     expect(await screen.findByText('No Alarms')).toBeInTheDocument();
 
     screen.queryByText('Add Another URL').click();
@@ -195,7 +212,11 @@ describe('when creating a new app', () => {
   });
 
   it('can handle error from server', async () => {
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     expect(await screen.findByText('No Alarms')).toBeInTheDocument();
     
     const newAppName = 'error.com';
@@ -217,7 +238,11 @@ describe('when creating a new app', () => {
   });
 
   it('can handle internal error from fetch', async () => {
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     expect(await screen.findByText('No Alarms')).toBeInTheDocument();
     
     server.close();
@@ -248,7 +273,11 @@ describe('when creating a new app', () => {
       }),
     );
     
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     expect(await screen.findByText('No Alarms')).toBeInTheDocument();
 
     screen.queryByText('Add Another URL').click();
@@ -277,7 +306,11 @@ describe('when creating a new app', () => {
       })
     );
     
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     expect(await screen.findByText('No Alarms')).toBeInTheDocument();
     
     screen.queryByText('Add Another URL').click();
@@ -345,7 +378,11 @@ describe('when deleting a new app', () => {
 
   it('works', async () => {
     setupDeleteServer();
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     await waitFor(() => screen.getByText(deleteTestParams.sites[0].name));
     
     const deleteButtons = document.getElementsByClassName('delete-url-button');
@@ -370,7 +407,11 @@ describe('when deleting a new app', () => {
 
   it('can be cancelled', async () => {
     setupDeleteServer();
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     await waitFor(() => screen.getByText(deleteTestParams.sites[0].name));
 
     const deleteButtons = document.getElementsByClassName('delete-url-button');
@@ -390,7 +431,11 @@ describe('when deleting a new app', () => {
         return res(ctx.status(500));
       }),
     );
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     await waitFor(() => screen.getByText(deleteTestParams.sites[0].name));
     
     const deleteButtons = document.getElementsByClassName('delete-url-button');
@@ -414,7 +459,11 @@ describe('when deleting a new app', () => {
 
   it('can handle internal error from fetch', async () => {
     setupDeleteServer();
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     await waitFor(() => screen.getByText(deleteTestParams.sites[0].name));
 
     server.close();    
@@ -447,7 +496,11 @@ describe('when deleting a new app', () => {
       }),
     );
 
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     await waitFor(() => screen.getByText(deleteTestParams.sites[0].name));
 
     const deleteButtons = document.getElementsByClassName('delete-url-button');
@@ -479,7 +532,11 @@ describe('when deleting a new app', () => {
       }),
     );
 
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     await waitFor(() => screen.getByText(deleteTestParams.sites[0].name));    
 
     const deleteButtons = document.getElementsByClassName('delete-url-button');
@@ -513,7 +570,11 @@ describe('when getting the initial app list', () => {
       }),
     );
 
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     await waitFor(() => {
       expect(document.getElementsByClassName('error-bar').length)
         .toBeGreaterThan(0);
@@ -528,7 +589,11 @@ describe('when getting the initial app list', () => {
 
   it('can handle internal error from fetch', async () => {
     server.close();
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     await waitFor(() => {
       expect(document.getElementsByClassName('error-bar').length)
         .toBeGreaterThan(0);
@@ -549,7 +614,11 @@ describe('when getting the initial app list', () => {
       }),
     );
 
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     await waitFor(() => {
       expect(document.getElementsByClassName('error-bar').length)
         .toBeGreaterThan(0);
@@ -571,7 +640,11 @@ describe('when getting the initial app list', () => {
       }),
     );
 
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     await waitFor(() => {
       expect(document.getElementsByClassName('error-bar').length)
         .toBeGreaterThan(0);
@@ -633,7 +706,11 @@ describe('while refreshing app', () => {
   
   it('works', async () => {
     setupRefreshServer();
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
 
     const refreshButtons = await(screen.findAllByText('Refresh'));
     const details = document.getElementsByClassName('large')[0];
@@ -657,7 +734,11 @@ describe('while refreshing app', () => {
 
   it('can refresh all applications at once', async () => {
     setupRefreshServer();
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     await waitFor(() => screen.getByText(refreshTestParams.sites[0].name));
 
     screen.getByText('Refresh All').click();
@@ -679,7 +760,11 @@ describe('while refreshing app', () => {
       }),
     );
 
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     const refreshButtons = await(screen.findAllByText('Refresh'));
     refreshButtons[0].click();
     await screen.findByRole('alert');
@@ -695,7 +780,11 @@ describe('while refreshing app', () => {
 
   it('can handle internal error from fetch', async () => {
     setupRefreshServer();
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     const refreshButtons = await(screen.findAllByText('Refresh'));
 
     server.close();
@@ -720,7 +809,11 @@ describe('while refreshing app', () => {
       }),
     );
     
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     const refreshButtons = await(screen.findAllByText('Refresh'));
     refreshButtons[0].click();
     await screen.findByRole('alert');
@@ -747,7 +840,11 @@ describe('while refreshing app', () => {
       }),
     );
 
-    render(<Dashboard/>);
+    render(
+      <Router>
+        <Dashboard/>
+      </Router>
+    );
     const refreshButtons = await(screen.findAllByText('Refresh'));
     refreshButtons[0].click();
     await screen.findByRole('alert');
