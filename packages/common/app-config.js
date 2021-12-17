@@ -24,7 +24,7 @@ const testSettings = {
   EXT_URL_LINKEDIN: 'https://www.linkedin.com/in/hughes-ch/',
   EXT_URL_GITHUB: 'https://github.com/',
   EXT_URL_WEBSITE: 'https://blog.chrishughesdev.com',
-  LONG_RUNNING_FETCH_TIMEOUT: 5000,
+  LONG_RUNNING_FETCH_TIMEOUT: 2000,
 };
   
 const devSettings = { ...testSettings };
@@ -36,6 +36,7 @@ devSettings.AUTH_ENDPOINT = `https://cognito-idp.` +
   `${devSettings.AUTH_POOL_REGION}.amazonaws.com/`;
 devSettings.AUTH_ISSUER = `${devSettings.AUTH_ENDPOINT}` +
   `${devSettings.AUTH_POOL_ID}`;
+devSettings.LONG_RUNNING_FETCH_TIMEOUT = 8000;
 
 const prodSettings = { ...devSettings};
 prodSettings.APP_NAME = 'the-dash.chrishughesdev.com';

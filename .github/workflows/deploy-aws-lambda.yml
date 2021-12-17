@@ -30,5 +30,6 @@ jobs:
         yarn aws-deploy
         
     - name: Logout
+      if: always()
       run: docker logout
         
