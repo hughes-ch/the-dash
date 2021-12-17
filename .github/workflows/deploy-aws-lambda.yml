@@ -29,3 +29,6 @@ jobs:
         yarn aws-build
         yarn aws-deploy
         
+    - name: Logout
+      run: docker logout
+        
