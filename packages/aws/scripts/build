@@ -1,15 +1,19 @@
 #!/usr/bin/bash
 if [ "${GITHUB_REF##*/}" = "main" ]
 then
-  DEPLOY_ENV=production
+    DEPLOY_ENV=production
 else
-  DEPLOY_ENV=dev
+    DEPLOY_ENV=dev
 fi
 
 echo Building $DEPLOY_ENV
-FUNC=the-dash-$DEPLOY_ENV-email-service
-IMG=$FUNC:latest
-
 yarn test
 yarn webpack
-docker build . -t $IMG
+
+SERVICES='email-service heroku-ping'
+for SERVICE in $SERVICES
+do
+    FUNC=the-dash-$DEPLOY_ENV-$SERVICE
+    IMG=$FUNC:latest
+    docker build . -t $IMG --file Dockerfile.$SERVICE
+done
