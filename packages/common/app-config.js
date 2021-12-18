@@ -14,7 +14,7 @@ const testSettings = {
   AUTH_POOL_REGION: 'us-east-1',
   AUTH_RESPONSE_TYPE: 'token',
   AUTH_SCOPE: 'email+openid',
-  AUTOMATED_PING_RATE: 12, // hours
+  AUTOMATED_PING_RATE: 6, // hours
   CREDENTIAL_COOKIE: 'creds',
   DASHBOARD_ERROR_TIMEOUT: 300, // ms
   DASHBOARD_URL: 'dashboard',
