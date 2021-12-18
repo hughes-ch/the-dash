@@ -7,9 +7,10 @@
 import '@testing-library/jest-dom';
 import AuthContext from './auth-context';
 import Authenticator from './authenticator';
+import { BrowserRouter as Router } from 'react-router-dom';
 import config from '@the-dash/common/app-config';
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { requestValidApiToken,
          requestValidExcept,
          requestValidTokens,
@@ -23,7 +24,15 @@ beforeAll(() => {
 });
 
 afterEach(() => {
-  mockNavigate.mockReset();
+  delete window.location;
+  const mockLocation = {
+    hash: '',
+    host: 'localhost',
+    href: 'http:/localhost',
+    protocol: 'http:',
+  };
+  window.location = mockLocation;
+
   utAuthServer.resetHandlers();
   document.cookie = `${config.CREDENTIAL_COOKIE}=''`;
 });
@@ -31,22 +40,6 @@ afterEach(() => {
 afterAll(() => {
   utAuthServer.close();
 });
-
-// Mock the window location
-delete window.location;
-const mockLocation = {
-  hash: '',
-  host: 'localhost',
-  protocol: 'http:',
-};
-window.location = mockLocation;
-
-const mockNavigate = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  Navigate: (props) => (<h1>{props.to}</h1>),
-  useLocation: () => mockLocation,
-}));
 
 /**
  * Unit tests
@@ -56,11 +49,13 @@ describe('the authenticator', () => {
     window.location.hash = requestValidTokens();
     const protectedContents = 'Hello world!';
     render(
-      <Authenticator>
-        <p>
-          {protectedContents}
-        </p>
-      </Authenticator>
+      <Router>
+        <Authenticator>
+          <p>
+            {protectedContents}
+          </p>
+        </Authenticator>
+      </Router>
     );
 
     expect(await screen.findByText(protectedContents)).toBeInTheDocument();
@@ -73,11 +68,13 @@ describe('the authenticator', () => {
     document.cookie = `${config.CREDENTIAL_COOKIE}=${requestValidApiToken()}`;
     const protectedContents = 'Hello world!';
     render(
-      <Authenticator>
-        <p>
-          {protectedContents}
-        </p>
-      </Authenticator>
+      <Router>
+        <Authenticator>
+          <p>
+            {protectedContents}
+          </p>
+        </Authenticator>
+      </Router>
     );
 
     expect(await screen.findByText(protectedContents)).toBeInTheDocument();
@@ -91,13 +88,24 @@ describe('the authenticator', () => {
     window.location.hash = hash;
     const protectedContents = 'Hello world!';
     render(
-      <Authenticator>
-        <p>
-          {protectedContents}
-        </p>
-      </Authenticator>
+      <Router>
+        <Authenticator>
+          <p>
+            {protectedContents}
+          </p>
+        </Authenticator>
+      </Router>
     );
 
-    expect(await screen.findByText('/')).toBeInTheDocument();
+    const baseUrl = config.AUTH_BASE_URL;
+    const clientId = config.AUTH_CLIENT_ID;
+    const responseType = config.AUTH_RESPONSE_TYPE;
+    const scope = config.AUTH_SCOPE;
+    const redirectUrl = window.location.href;
+    const expectedHref = `${baseUrl}login?client_id=${clientId}&` +
+          `response_type=${responseType}&scope=${scope}&` +
+          `redirect_uri=${redirectUrl}`;
+
+    await waitFor(() => expect(window.location.href).toEqual(expectedHref));
   });
 });

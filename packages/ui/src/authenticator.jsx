@@ -9,11 +9,7 @@ import authenticate from '@the-dash/common/authenticate';
 import config from '@the-dash/common/app-config';
 import {getCredentialCookie} from '@the-dash/common/requests';
 import React, {useContext, useEffect, useState} from 'react';
-import {Navigate, useLocation} from 'react-router-dom';
-
-const navigateAway = (
-  <Navigate to='/'/>
-);
+import {useLocation} from 'react-router-dom';
 
 /**
  * Verifies the token from the URL hash
@@ -79,7 +75,7 @@ function Authenticator(props) {
   useEffect(async () => {
     auth.credentials.isLoggedIn = await verifyClient(location);
     if (!auth.credentials.isLoggedIn) {
-      setAuthorizedContent(navigateAway);
+      auth.actions.login();
     } else {
       setAuthorizedContent(props.children);
     }

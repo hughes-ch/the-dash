@@ -32,9 +32,20 @@ it('renders index page', () => {
 });
 
 it('does not render dashboard when logged out', async () => {
+  const origLocation = window.location;
+  delete window.location;
+  const mockLocation = {
+    hash: '',
+    host: 'localhost',
+    href: 'http:/localhost',
+    protocol: 'http:',
+  };
+  window.location = mockLocation;
+  
   window.history.replaceState({}, '', '/dashboard');  
   render(<App/>);
-  expect(await screen.findByText('/')).toBeInTheDocument();
+  expect(screen.queryByText('Last Status Update:')).not.toBeInTheDocument();
+  window.location = origLocation;
 });
 
 it('navigates back to index page when page is missing', async () => {

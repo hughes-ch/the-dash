@@ -6,6 +6,7 @@
  */
 import '@testing-library/jest-dom';
 import AuthContext, {createAuthContext} from './auth-context';
+import { BrowserRouter as Router } from 'react-router-dom';
 import NavigationBar from './nav-bar';
 import {render, screen} from '@testing-library/react';
 
@@ -18,9 +19,11 @@ it('renders correctly when logged in', () => {
   authContextVal.credentials.isLoggedIn = true;
   
   render(
-    <AuthContext.Provider value={authContextVal}>
-      <NavigationBar />
-    </AuthContext.Provider>
+    <Router>
+      <AuthContext.Provider value={authContextVal}>
+        <NavigationBar />
+      </AuthContext.Provider>
+    </Router>
   );
   
   expect(screen.getByRole('navigation')).toHaveTextContent('The Dash');
@@ -33,9 +36,11 @@ it('renders correctly when logged out', () => {
   authContextVal.credentials.isLoggedIn = false;
   
   render(
-    <AuthContext.Provider value={authContextVal}>
-      <NavigationBar />
-    </AuthContext.Provider>
+    <Router>
+      <AuthContext.Provider value={authContextVal}>
+        <NavigationBar />
+      </AuthContext.Provider>
+    </Router>
   );
   
   expect(screen.getByRole('navigation')).toHaveTextContent('The Dash');
