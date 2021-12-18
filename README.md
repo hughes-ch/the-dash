@@ -15,7 +15,7 @@ Selecting the "Add new URL" button at the bottom of the page allows users to mon
 
 See below for an example of the dashboard:
 
-<img width="400" height="400" src="logo.svg" alt=""><br>
+<img width="800" src="packages/ui/public/the-dash-screenshot.png" alt=""><br>
 
 ## Contributing to THE DASH
 @hughes-ch expects to be the only contributer to this project, but this section is being added because he's forgetful.
