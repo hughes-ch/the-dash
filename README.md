@@ -91,9 +91,7 @@ To run **all** unit tests:
 
 To run **some** unit tests: 
 
-`yarn workspace @the-dash/<package> test` 
-
-`<package>` can be `api`, `common`, etc
+`yarn workspace @the-dash/<package> test` (Note: `<package>` can be `api`, `common`, etc)
 
 To run AWS service locally: 
 
