@@ -14,7 +14,8 @@ Once logged in, users will be displayed the general status, a detailed overview,
 Selecting the "Add new URL" button at the bottom of the page allows users to monitor a new website. Selecting the X at the top left of each card will remove the selected website. 
 
 See below for an example of the dashboard:
-<img width="100" height="100" src="logo.svg" alt=""><br>
+
+<img width="400" height="400" src="logo.svg" alt=""><br>
 
 ## Contributing to THE DASH
 @hughes-ch expects to be the only contributer to this project, but this section is being added because he's forgetful.
@@ -61,13 +62,39 @@ While the application is essentially complete with just the UI and API packages,
 
 Lamdbas are deployed via the "Deploy AWS Lambda" Github action. They are first webpacked into the `/aws/dist` directory. Then the output is copied into a Docker image and deployed to AWS ECR. The code which manages the deploy is in `/aws/scripts`. Github actions are defined in the top level of the repo in `/.github`.
 
-### Testing
-To host UI and API locally: `yarn host`
-
-To run all unit tests: `yarn test`
-
-To run _some_ unit tests: 
-AWS: need .env
-AWS: How to test locally
 ### Setting up environment
-The only thing to note on the `common` package that has not been described in other packages is that the file `app-config.js` can be changed based on the deploy environment. For example, this file contains AWS settings that are not applicable during a unit test. To change the deploy environment, use the `REACT_APP_DEPLOY_ENVIRONMENT` environment variable. 
+THE DASH uses the yarn package manager to handle dependencies. Yarn 3 notes that you shouldn't need to install before using a repo, but just to be sure, you can run:
+
+`yarn install` 
+
+to install all dependencies. 
+
+The next thing to do is to define a `.env` file in `/packages/aws/`. This file is used to AWS credentials, specifically:
+- MY_AWS_ACCESS_KEY
+- MY_AWS_REGION
+- MY_AWS_SECRET_ACCESS_KEY
+- AWS_COGNITO_USER
+- AWS_COGNITO_PASS
+
+Don't commit these variables.
+
+The last thing to note is that `app-config.js` in the `common` package is used to define constants used throughout the application. Some of these change based on the deployment environment. You can change the deployment environment with the `REACT_APP_DEPLOY_ENVIRONMENT` environment variable. This should be handled for you, but just something to keep in mind. 
+
+### Testing
+To host UI and API locally: 
+
+`yarn host`
+
+To run **all** unit tests: 
+
+`yarn test`
+
+To run **some** unit tests: 
+
+`yarn workspace @the-dash/<package> test` 
+
+`<package>` can be `api`, `common`, etc
+
+To run AWS service locally: 
+
+`aws-build && aws-start`
