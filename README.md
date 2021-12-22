@@ -13,9 +13,9 @@ Once logged in, users will be displayed the general status, a detailed overview,
 
 Selecting the "Add new URL" button at the bottom of the page allows users to monitor a new website. Selecting the X at the top left of each card will remove the selected website. 
 
-See below for an example of the dashboard:
+See below to see the dashboard in action:
 
-<img width="800" src="packages/ui/public/the-dash-screenshot.png" alt=""><br>
+https://user-images.githubusercontent.com/17994407/147026124-3a062eae-fe04-42a6-a1bd-02a613132987.mp4
 
 ## Contributing to THE DASH
 @hughes-ch expects to be the only contributer to this project, but this section is being added because he's forgetful.
